@@ -150,8 +150,8 @@ CIImage(contentsOf: url, options: [kCIImageAuxiliaryDepth: true])
 
 ## Machine Learning
 
-[Machine Learning](img/1.png)
+![Machine Learning](img/1.png)
 
 ## ARKit
 
-[ARKit](img/2.png)
+![ARKit](img/2.png)
