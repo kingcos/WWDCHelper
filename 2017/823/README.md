@@ -8,12 +8,12 @@
 
 ## Glyph & Icon
 
-- Glyph 是单色的，可以用代码（程序化）添加颜色。
+- Glyph 是单色的，可以用代码（程序化）添加颜色。
 - Icon 是彩色的，高渲染的资源文件。
 
-## 高效的 Glyph 设计原则
+## 高效的 Glyph 设计原则
 
-- 简化的形式（Simplified form）
+- 简化的形式（Simplified form）
 - 统一的象征（Universal symbology）
   - 在不同的语言环境，生活环境都能清晰无歧义辨识的标志
 - 上下文中可读性高（Quickly readable in context）
@@ -32,18 +32,18 @@
 
 ## Glyph 的设计考量
 
-- 视觉重心（Optical weight）
+- 视觉重心（Optical weight）
   - 表面区域较小的 Glyph 可以缩放来达到视觉平衡。
 - 线条（Lines）
   - 线宽（Line weight）一致化。
 - 位置（Positioning）
-  - 以视觉居中为主。
+  - 以视觉居中为主。
 
 ## 制作原则
 
 - 按一个集合来做（Build as a set）
-- 上下文中测试（Test in context）
-- 在设备中预览（Preview on device)）
+- 上下文中测试（Test in context）
+- 在设备中预览（Preview on device）
 
 ## Reference
 
