@@ -4,4 +4,4 @@ WWDC notes &amp; code
 
 ## WWDC 17
 
-- [102 ](/2017/102)
+- [102 Platforms State of the Union](/2017/102)

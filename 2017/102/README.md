@@ -20,7 +20,7 @@
 - 支持 Swift，Objective-C，C/C++ 重构。
 - 构建速度加快，打包后体积更小。
 
-### String
+## String
 
 - String 在 Swift 4.0 中已改为集合类型（Collection）。
 
@@ -56,7 +56,7 @@ let substring = html[...gtIndex]
 "👩‍👩‍👧‍👦".count == 1
 ```
 
-### Codable
+## Codable
 
 ```Swift
 // Codable 是 Decodable & Encodable 的别名
@@ -137,7 +137,7 @@ navigationItem.searchController = searchController
 - 此处代码摘自视频，未经测试。
 
 ```Swift
-// 在不支持新标准的平台播放可加入一下判断
+// 在不支持新标准的平台播放可加入以下判断
 var asset = AVAsset(url: URL(fileURLWithPath: "hevc.mov"))
 if !asset.isPlayable {
     asset = AVAsset(url: URL(fileURLWithPath: "h264.mov"))
@@ -155,3 +155,7 @@ CIImage(contentsOf: url, options: [kCIImageAuxiliaryDepth: true])
 ## ARKit
 
 ![ARKit](img/2.png)
+
+## Reference
+
+- [WWDC 17 - 102 Platforms State of the Union](https://developer.apple.com/videos/play/wwdc2017/102/)
