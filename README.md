@@ -8,4 +8,5 @@ WWDC notes &amp; code
 
 ### Design
 
+- [822 - App Icon Design](/2017/822)
 - [823 - Designing Glyphs](/2017/823)
