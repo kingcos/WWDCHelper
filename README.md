@@ -5,6 +5,7 @@ WWDC_CL & WWDC notes & code
 ## WWDC_CL
 
 > Inspired by [qiaoxueshi/WWDC_2015_Video_Subtitle](https://github.com/qiaoxueshi/WWDC_2015_Video_Subtitle) & [ohoachuck/wwdc-downloader](https://github.com/ohoachuck/wwdc-downloader).
+> 
 > Thanks for their inspiration and efforts.👏
 
 WWDC_CL is a command line tool on macOS for you to get WWDC resources easily like subtitles in Swift.
@@ -30,6 +31,8 @@ You can also download all the subtitles of WWDC 2017 directly in this repository
 
 - [qiaoxueshi/WWDC_2015_Video_Subtitle](https://github.com/qiaoxueshi/WWDC_2015_Video_Subtitle)
 - [ohoachuck/wwdc-downloader](https://github.com/ohoachuck/wwdc-downloader)
+- [Command Line Programs on macOS Tutorial - raywenderlich.com](https://www.raywenderlich.com/163134/command-line-programs-macos-tutorial-2)
+- [macOS 教程：命令行程序 - DeveloperLx/macOS_Development_Tutorials_translation](https://github.com/DeveloperLx/macOS_Development_Tutorials_translation/blob/master/Command%20Line%20Programs%20on%20macOS%20Tutorial.md)
 
 ## WWDC 17 - Notes
 
