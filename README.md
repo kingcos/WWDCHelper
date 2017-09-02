@@ -10,7 +10,7 @@ WWDC_CL & WWDC notes & code
 
 WWDC_CL is a command line tool on macOS for you to get WWDC resources easily like subtitles in Swift.
 
-Now you can get SD/HD video & PDF links, and download subtitles in English or **Chinese** (SRT format) directly by WWDC_CL.
+Now you can get SD/HD video & PDF links, and download subtitles in English or **Chinese** (SRT) directly by WWDC_CL.
 
 You can also download all the subtitles of WWDC 2017 directly in this repository, or you can also choose English or Chinese version at the [releases](https://github.com/kingcos/Learning-WWDC/releases) page.
 
