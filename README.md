@@ -22,6 +22,10 @@ You can also download all the subtitles of WWDC 2017 directly in this repository
 
 > Maybe implement in the future.
 
+- [ ] Remove useless lines
+- [ ] Clean code
+- [ ] Download multiple subtitles at once
+- [ ] Add spaces around English words or numbers
 - [ ] Support subtitles in both English & Chinese
 - [ ] Support WWDC before 2016
 - [ ] Support for Linux 🐧
