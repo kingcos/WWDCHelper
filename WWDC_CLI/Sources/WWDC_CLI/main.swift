@@ -1,6 +1,7 @@
 import Foundation
 import CommandLineKit
 import Rainbow
+import WWDC_CLI_Kit
 
 let cli = CommandLineKit.CommandLine()
 
@@ -28,9 +29,9 @@ let listOption = BoolOption(shortFlag: "l", longFlag: "list",
                             helpMessage: "List all sessions info.")
 cli.addOption(listOption)
 
-let sessionOption = MultiStringOption(shortFlag: "s", longFlag: "session",
-                                      helpMessage: "Session number in WWDC.")
-cli.addOption(sessionOption)
+let sessionIDOption = MultiStringOption(shortFlag: "s", longFlag: "session",
+                                        helpMessage: "Session numbers in WWDC.")
+cli.addOption(sessioIDnOption)
 
 let languageOption = StringOption(shortFlag: "g", longFlag: "language",
                                   helpMessage: "Subtitle in which language. Default is Chinese.")
@@ -58,5 +59,5 @@ if helpOption.value {
 
 let year = yearOption.value
 let isList = listOption.value
-let sessions = sessionOption.value
+let sessionIDs = sessionIDOption.value
 let language = languageOption.value
