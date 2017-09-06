@@ -1,0 +1,18 @@
+{
+  "autoPin": true,
+  "pins": [
+    {
+      "package": "CommandLine",
+      "reason": null,
+      "repositoryURL": "https://github.com/jatoben/CommandLine",
+      "version": "3.0.0-pre1"
+    },
+    {
+      "package": "Rainbow",
+      "reason": null,
+      "repositoryURL": "https://github.com/onevcat/Rainbow",
+      "version": "2.1.0"
+    }
+  ],
+  "version": 1
+}
