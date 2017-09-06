@@ -1,3 +1,6 @@
+import Foundation
+import PathKit
+
 public enum WWDCYear: Int {
     case wwdc2016 = 2016
     case wwdc2017 = 2017
@@ -38,7 +41,7 @@ public struct WWDCCommandLineKit {
     public let subtitleFilename: String?
     public let isSubtitleForSDVideo: Bool
     public let isSubtitleForHDVideo: Bool
-    public let subtitlePath: String?
+    public let subtitlePath: Path?
     
     let isSubtitleFilenameCustom: Bool
     
@@ -55,7 +58,7 @@ public struct WWDCCommandLineKit {
         self.sessionIDs = sessionIDs ?? []
         self.language = language ?? .chinese
         self.subtitleFilename = subtitleFilename
-        self.subtitlePath = subtitlePathOption
+        self.subtitlePath = Path(subtitlePathOption ?? ".").absolute()
         
         if self.subtitleFilename != nil {
             isSubtitleFilenameCustom = true
