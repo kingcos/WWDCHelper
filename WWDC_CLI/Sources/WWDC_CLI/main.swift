@@ -22,28 +22,36 @@ cli.formatOutput = { s, type in
 }
 
 let yearOption = IntOption(shortFlag: "y", longFlag: "year",
-                           helpMessage: "Year of WWDC. Default is WWDC 2017.")
-cli.addOption(yearOption)
-
-let listOption = BoolOption(shortFlag: "l", longFlag: "list",
-                            helpMessage: "List all sessions info.")
-cli.addOption(listOption)
-
+                           helpMessage: "Setup the year of WWDC. Default is WWDC 2017.")
+let isListOption = BoolOption(shortFlag: "l", longFlag: "list",
+                              helpMessage: "List all sessions info.")
 let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "session",
-                                        helpMessage: "Session numbers in WWDC.")
-cli.addOption(sessionIDsOption)
-
-let languageOption = StringOption(shortFlag: "g", longFlag: "language",
-                                  helpMessage: "Subtitle in which language. Default is Chinese.")
-cli.addOption(languageOption)
-
+                                         helpMessage: "Setup session numbers in WWDC.")
+let subtitleLanguageOption = StringOption(shortFlag: "g", longFlag: "language",
+                                          helpMessage: "Setup the language of subtitle. Default is Chinese.")
+let subtitleFilenameOption = StringOption(shortFlag: "n", longFlag: "name",
+                                          helpMessage: "Setup the filename of subtitle. Default is same to session download name.")
+let isSubtitleForSDVideoOption = BoolOption(shortFlag: "", longFlag: "sd",
+                                          helpMessage: "Setup default subtitle filename of SD video.")
+let isSubtitleForHDVideoOption = BoolOption(shortFlag: "", longFlag: "hd",
+                                          helpMessage: "Setup default subtitle filename of HD video.")
+let subtitlePathOption = StringOption(shortFlag: "p", longFlag: "path",
+                                      helpMessage: "Setup where download the subtitle to. Default is the Download folder.")
 let helpOption = BoolOption(shortFlag: "h", longFlag: "help",
                             helpMessage: "Print this help info.")
-cli.addOption(helpOption)
-
 let versionOption = BoolOption(shortFlag: "v", longFlag: "version",
                                helpMessage: "Print version info.")
-cli.addOption(versionOption)
+
+cli.addOptions(yearOption,
+               isListOption,
+               sessionIDsOption,
+               subtitleLanguageOption,
+               subtitleFilenameOption,
+               isSubtitleForSDVideoOption,
+               isSubtitleForSDVideoOption,
+               subtitlePathOption,
+               helpOption,
+               versionOption)
 
 do {
     try cli.parse()
@@ -58,6 +66,10 @@ if helpOption.value {
 }
 
 let year = yearOption.value
-let isList = listOption.value
+let isList = isListOption.value
 let sessionIDs = sessionIDsOption.value
-let language = languageOption.value
+let subtitleLanguage = subtitleLanguageOption.value
+let subtitleFilename = subtitleFilenameOption.value
+let isSubtitleForSDVideo = isSubtitleForSDVideoOption.value
+let isSubtitleForHDVideo = isSubtitleForHDVideoOption.value
+let subtitlePath = subtitlePathOption.value

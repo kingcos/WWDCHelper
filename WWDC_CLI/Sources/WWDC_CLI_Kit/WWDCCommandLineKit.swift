@@ -35,20 +35,52 @@ public struct WWDCCommandLineKit {
     public let isList: Bool
     public let sessionIDs: [Int]
     public let language: SubtitleLanguage
+    public let subtitleFilename: String?
+    public let isSubtitleForSDVideo: Bool
+    public let isSubtitleForHDVideo: Bool
+    public let subtitlePath: String?
+    
+    let isSubtitleFilenameCustom: Bool
     
     public init(year: WWDCYear?,
                 isList: Bool,
                 sessionIDs: [Int]?,
-                language: SubtitleLanguage?) {
+                language: SubtitleLanguage?,
+                subtitleFilename: String?,
+                isSubtitleForSDVideo: Bool,
+                isSubtitleForHDVideo: Bool,
+                subtitlePathOption: String?) {
         self.year = year ?? .wwdc2017
         self.isList = isList
         self.sessionIDs = sessionIDs ?? []
         self.language = language ?? .chinese
+        self.subtitleFilename = subtitleFilename
+        self.subtitlePath = subtitlePathOption
+        
+        if self.subtitleFilename != nil {
+            isSubtitleFilenameCustom = true
+            
+            self.isSubtitleForSDVideo = false
+            self.isSubtitleForHDVideo = false
+        } else {
+            isSubtitleFilenameCustom = false
+            
+            self.isSubtitleForSDVideo = isSubtitleForSDVideo
+            self.isSubtitleForHDVideo = isSubtitleForHDVideo
+        }
+    }
+}
+
+extension WWDCCommandLineKit {
+    public func getSessionsList() -> [WWDCSession]? {
+        return nil
     }
     
+    public func getSession() {
+        
+    }
     
-    
-    
-    
-    
+    public func getSubtitles() {
+        
+    }
 }
