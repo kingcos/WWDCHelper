@@ -1,6 +1,6 @@
 //
 //  WWDCSession.swift
-//  WWDC_CLI
+//  WWDC_CLI_Kit
 //
 //  Created by kingcos on 06/09/2017.
 //

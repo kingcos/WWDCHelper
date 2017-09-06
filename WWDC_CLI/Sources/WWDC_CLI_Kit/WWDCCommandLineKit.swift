@@ -1,3 +1,11 @@
+//
+//  WWDCCommandLineKit.swift
+//  WWDC_CLI_Kit
+//
+//  Created by kingcos on 06/09/2017.
+//
+//
+
 import Foundation
 import PathKit
 

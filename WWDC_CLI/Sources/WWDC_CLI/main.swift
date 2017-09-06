@@ -1,3 +1,11 @@
+//
+//  main.swift
+//  WWDC_CLI
+//
+//  Created by kingcos on 07/09/2017.
+//
+//
+
 import Foundation
 import CommandLineKit
 import Rainbow
