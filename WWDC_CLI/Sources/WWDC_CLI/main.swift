@@ -29,9 +29,9 @@ let listOption = BoolOption(shortFlag: "l", longFlag: "list",
                             helpMessage: "List all sessions info.")
 cli.addOption(listOption)
 
-let sessionIDOption = MultiStringOption(shortFlag: "s", longFlag: "session",
+let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "session",
                                         helpMessage: "Session numbers in WWDC.")
-cli.addOption(sessioIDnOption)
+cli.addOption(sessionIDsOption)
 
 let languageOption = StringOption(shortFlag: "g", longFlag: "language",
                                   helpMessage: "Subtitle in which language. Default is Chinese.")
@@ -59,5 +59,5 @@ if helpOption.value {
 
 let year = yearOption.value
 let isList = listOption.value
-let sessionIDs = sessionIDOption.value
+let sessionIDs = sessionIDsOption.value
 let language = languageOption.value
