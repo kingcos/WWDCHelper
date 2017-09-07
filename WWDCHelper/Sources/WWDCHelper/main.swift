@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  WWDC_CLI
+//  WWDCHelper
 //
 //  Created by kingcos on 07/09/2017.
 //
@@ -9,7 +9,7 @@
 import Foundation
 import CommandLineKit
 import Rainbow
-import WWDC_CLI_Kit
+import WWDCHelperKit
 
 let cli = CommandLineKit.CommandLine()
 

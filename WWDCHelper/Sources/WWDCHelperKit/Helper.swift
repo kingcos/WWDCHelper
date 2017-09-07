@@ -1,6 +1,6 @@
 //
-//  WWDCCommandLineKit.swift
-//  WWDC_CLI_Kit
+//  Helper.swift
+//  WWDCHelperKit
 //
 //  Created by kingcos on 06/09/2017.
 //
