@@ -11,8 +11,8 @@ import XCTest
 @testable import WWDCHelperKit
 
 class WWDCHelperKitTests: XCTestCase {
-    func testHelperKitSpec() {
-        specHelperKit()
+    func testRunSpecture() {
+        testWWDCHelperKit()
     }
     
     
