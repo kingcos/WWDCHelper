@@ -31,11 +31,9 @@ cli.formatOutput = { s, type in
 
 let yearOption = IntOption(shortFlag: "y", longFlag: "year",
                            helpMessage: "Setup the year of WWDC. Default is WWDC 2017.")
-let isListOption = BoolOption(shortFlag: "l", longFlag: "list",
-                              helpMessage: "List all sessions info.")
 let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "session",
                                          helpMessage: "Setup session numbers in WWDC.")
-let subtitleLanguageOption = StringOption(shortFlag: "g", longFlag: "language",
+let subtitleLanguageOption = StringOption(shortFlag: "l", longFlag: "language",
                                           helpMessage: "Setup the language of subtitle. Default is Chinese.")
 let subtitleFilenameOption = StringOption(shortFlag: "n", longFlag: "name",
                                           helpMessage: "Setup the filename of subtitle. Default is same to session download name.")
@@ -51,7 +49,6 @@ let versionOption = BoolOption(shortFlag: "v", longFlag: "version",
                                helpMessage: "Print version info.")
 
 cli.addOptions(yearOption,
-               isListOption,
                sessionIDsOption,
                subtitleLanguageOption,
                subtitleFilenameOption,
@@ -74,10 +71,17 @@ if helpOption.value {
 }
 
 let year = yearOption.value
-let isList = isListOption.value
 let sessionIDs = sessionIDsOption.value
 let subtitleLanguage = subtitleLanguageOption.value
 let subtitleFilename = subtitleFilenameOption.value
 let isSubtitleForSDVideo = isSubtitleForSDVideoOption.value
 let isSubtitleForHDVideo = isSubtitleForHDVideoOption.value
 let subtitlePath = subtitlePathOption.value
+
+let helper = WWDCHelper(year: year,
+                        sessionIDs: sessionIDs,
+                        language: subtitleLanguage,
+                        subtitleFilename: subtitleFilename,
+                        isSubtitleForSDVideo: isSubtitleForSDVideo,
+                        isSubtitleForHDVideo: isSubtitleForHDVideo,
+                        subtitlePath: subtitlePath)

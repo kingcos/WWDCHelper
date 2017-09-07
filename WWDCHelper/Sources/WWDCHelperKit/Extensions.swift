@@ -13,8 +13,8 @@ extension String {
         return NSRange(location: 0, length: characters.count)
     }
     
-    func substring(with range: NSRange) {
+    func substring(with range: NSRange) -> String {
         let nsRange = NSRange(location: range.location, length: range.length)
-        substring(with: nsRange)
+        return substring(with: nsRange)
     }
 }
