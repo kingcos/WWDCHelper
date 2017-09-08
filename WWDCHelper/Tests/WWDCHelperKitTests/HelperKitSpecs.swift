@@ -65,7 +65,7 @@ public func testWWDCHelperKit() {
         }
         
         $0.describe(" --- WWDC Helper ---") {
-            let helper = WWDCHelper()
+            var helper = WWDCHelper()
             var resourceURLs = [String]()
             
             $0.it("should get sessions info") {
@@ -88,15 +88,15 @@ public func testWWDCHelperKit() {
                 try expect(expectResult) == result
             }
             
-            $0.it("get subtitle index URL prefix") {
+            $0.it("should get subtitle index URL") {
                 let result = helper.getSubtitleIndexURL(with: resourceURLs)
                 let expectResult = "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/subtitles/eng/prog_index.m3u8"
                 
                 try expect(expectResult) == result
             }
             
-            $0.it("init a session") {
-                let result = helper.initSession(by: "102")!
+            $0.it("should get one session") {
+                let result = try! helper.getSession(by: "102")!
                 let expectResult = WWDCSession("102",
                                                "Platforms State of the Union",
                                                ["https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_of_the_union.mp4?dl=1",
@@ -107,11 +107,28 @@ public func testWWDCHelperKit() {
                 try expect(expectResult) == result
             }
             
-            $0.it("init all sessions") {
-                let result = try! helper.initAllSessions().count
+            $0.it("should get sessions") {
+                /*let result = try! helper.getSessions().count
                 let expectResult = 138
                 
-                try expect(expectResult) == result
+                try expect(expectResult) == result*/
+            }
+            
+            $0.it("should print sessions") {
+                let session1 = WWDCSession("102",
+                                            "Platforms State of the Union",
+                                            ["https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_of_the_union.mp4?dl=1",
+                                            "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_sd_platforms_state_of_the_union.mp4?dl=1",
+                                            "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_platforms_state_of_the_union.pdf"],
+                                            "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/subtitles/eng/prog_index.m3u8")
+                let session2 = WWDCSession("102",
+                                           "Platforms State of the Union",
+                                           ["",
+                                            "",
+                                            "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_platforms_state_of_the_union.pdf"],
+                                            "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/subtitles/eng/prog_index.m3u8")
+                
+                _ = [session1, session2].map { helper.printSession($0) }
             }
         }
     }

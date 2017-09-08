@@ -8,6 +8,7 @@
 
 import Foundation
 import PathKit
+import Rainbow
 
 public enum WWDCYear: Int {
     case wwdc2016 = 2016
@@ -34,18 +35,19 @@ public enum WWDCYear: Int {
 public enum SubtitleLanguage: String {
     case english = "eng"
     case chinese = "zho"
+    case empty
     case unknown
     
     init(_ value: String?) {
         guard let value = value else {
-            self = .chinese
+            self = .empty
             return
         }
         
         switch value {
-        case "eng", "English":
+        case "eng", "english":
             self = .english
-        case "chn", "Chinese":
+        case "chn", "chinese":
             self = .chinese
         default:
             self = .unknown
@@ -56,12 +58,12 @@ public enum SubtitleLanguage: String {
 public enum HelperError: Error {
     case unknownYear
     case unknownSubtitleLanguage
-    case unknown
+    case unknownSessionID
 }
 
 public struct WWDCHelper {
     public let year: WWDCYear
-    public let sessionIDs: [String]
+    public let sessionIDs: [String]?
     
     public let subtitleLanguage: SubtitleLanguage
     public let subtitleFilename: String?
@@ -72,6 +74,7 @@ public struct WWDCHelper {
     let isSubtitleFilenameCustom: Bool
     
     let parser = SessionContentParser()
+    var sessionsInfo = [String : String]()
     
     public init(year: Int? = nil,
                 sessionIDs: [String]? = nil,
@@ -81,7 +84,7 @@ public struct WWDCHelper {
                 isSubtitleForSDVideo: Bool = false,
                 isSubtitleForHDVideo: Bool = false) {
         self.year = WWDCYear(year)
-        self.sessionIDs = sessionIDs ?? []
+        self.sessionIDs = sessionIDs
         self.subtitleLanguage = SubtitleLanguage(subtitleLanguage)
         self.subtitleFilename = subtitleFilename
         self.subtitlePath = Path(subtitlePath ?? ".").absolute()
@@ -101,31 +104,50 @@ public struct WWDCHelper {
 }
 
 extension WWDCHelper {
-    public func initAllSessions() throws -> [WWDCSession] {
+    public mutating func enterHelper() throws {
         guard year != .unknown else { throw HelperError.unknownYear }
         guard subtitleLanguage != .unknown else { throw HelperError.unknownSubtitleLanguage }
         
-        let sessionsInfo = getSessionsInfo()
-        let sessionIDs = sessionsInfo.map { $0.0 }
+        if subtitleLanguage == .empty {
+            let sessions = try getSessions(by: sessionIDs)
+            _ = sessions.map { printSession($0) }
+        } else {
+            
+        }
+    }
+    
+    func downloadData() {
+        
+    }
+}
+
+extension WWDCHelper {
+    mutating func getSessions(by ids: [String]? = nil) throws -> [WWDCSession] {
+        if sessionsInfo.isEmpty {
+            sessionsInfo = getSessionsInfo()
+        }
+        let sessionIDs = ids ?? sessionsInfo.map { $0.0 }
         
         var sessions = [WWDCSession]()
         for sessionID in sessionIDs {
-            guard let session = initSession(by: sessionID) else { continue }
+            guard let session = try getSession(by: sessionID) else { continue }
             sessions.append(session)
         }
+        
         return sessions
     }
     
-    func initSession(by id: String) -> WWDCSession? {
-        guard let title = getSessionsInfo()[id] else { return nil }
+    mutating func getSession(by id: String) throws -> WWDCSession? {
+        if sessionsInfo.isEmpty {
+            sessionsInfo = getSessionsInfo()
+        }
+        guard let title = sessionsInfo[id] else { throw HelperError.unknownSessionID }
         let resources = getResourceURLs(by: id)
         let url = getSubtitleIndexURL(with: resources)
         
         return WWDCSession(id, title, resources, url)
     }
-}
-
-extension WWDCHelper {
+    
     func getSessionsInfo() -> [String : String] {
         let url = "https://developer.apple.com/videos/wwdc\(year.rawValue)/"
         let content = Network.shared.fetchContent(of: url)
@@ -140,5 +162,23 @@ extension WWDCHelper {
     
     func getSubtitleIndexURL(with resources: [String]) -> String {
         return parser.parseSubtitleIndexURLPrefix(in: resources[0]) + "/subtitles/eng/prog_index.m3u8"
+    }
+}
+
+extension WWDCHelper {
+    func printSession(_ session: WWDCSession) {
+        print("\(session.id) - \(session.title)".bold)
+        if let hdVideo = session.resources[.hdVideo], hdVideo != "" {
+            print("\(WWDCSessionResourceType.hdVideo.rawValue) Download:", "\n\(hdVideo)".underline)
+        }
+        
+        if let sdVideo = session.resources[.sdVideo], sdVideo != "" {
+            print("\(WWDCSessionResourceType.sdVideo.rawValue) Download:", "\n\(sdVideo)".underline)
+        }
+        
+        if let pdf = session.resources[.pdf], pdf != "" {
+            print("\(WWDCSessionResourceType.pdf.rawValue) Download:", "\n\(pdf)".underline)
+        }
+        print("- - - - - - - - - -".red)
     }
 }

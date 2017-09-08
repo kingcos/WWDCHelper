@@ -30,11 +30,11 @@ cli.formatOutput = { s, type in
 }
 
 let yearOption = IntOption(shortFlag: "y", longFlag: "year",
-                           helpMessage: "Setup the year of WWDC. Default is WWDC 2017.")
-let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "session",
+                           helpMessage: "Setup the year of WWDC. Only support 2016 & 2017 now. Default is WWDC 2017.")
+let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "sessions",
                                          helpMessage: "Setup session numbers in WWDC.")
 let subtitleLanguageOption = StringOption(shortFlag: "l", longFlag: "language",
-                                          helpMessage: "Setup the language of subtitle. Default is Chinese.")
+                                          helpMessage: "Setup the language of subtitle. Only support Chinese or English now. Default is Chinese.")
 let subtitleFilenameOption = StringOption(shortFlag: "n", longFlag: "name",
                                           helpMessage: "Setup the filename of subtitle. Default is same to session download name.")
 let isSubtitleForSDVideoOption = BoolOption(shortFlag: "", longFlag: "sd",
@@ -72,13 +72,13 @@ if helpOption.value {
 
 let year = yearOption.value
 let sessionIDs = sessionIDsOption.value
-let subtitleLanguage = subtitleLanguageOption.value
+let subtitleLanguage = subtitleLanguageOption.value?.lowercased()
 let subtitleFilename = subtitleFilenameOption.value
 let subtitlePath = subtitlePathOption.value
 let isSubtitleForSDVideo = isSubtitleForSDVideoOption.value
 let isSubtitleForHDVideo = isSubtitleForHDVideoOption.value
 
-let helper = WWDCHelper(year: year,
+var helper = WWDCHelper(year: year,
                         sessionIDs: sessionIDs,
                         subtitleLanguage: subtitleLanguage,
                         subtitleFilename: subtitleFilename,
@@ -86,4 +86,24 @@ let helper = WWDCHelper(year: year,
                         isSubtitleForSDVideo: isSubtitleForSDVideo,
                         isSubtitleForHDVideo: isSubtitleForHDVideo)
 
-let sessions: [WWDCSession]
+do {
+    print("Welcome to WWDCHelper by kingcos! 👏")
+    print("Please wait a little while. Helper is trying to fetch your favorite data hard...")
+    try helper.enterHelper()
+} catch {
+    guard let err = error as? HelperError else {
+        print("Unknown Error: \(error)".red.bold)
+        exit(EX_USAGE)
+    }
+    
+    switch err {
+    case .unknownYear:
+        print("WWDC \(year!) isn't been supported currently. Only support 2016 & 2017 now.".red.bold)
+    case .unknownSubtitleLanguage:
+        print("Language \(subtitleLanguage!) Only support Chinese or English now.".red.bold)
+    case .unknownSessionID:
+        print("".red.bold)
+    }
+    
+    exit(EX_USAGE)
+}
