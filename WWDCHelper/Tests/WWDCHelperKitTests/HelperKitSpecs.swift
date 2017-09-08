@@ -88,9 +88,23 @@ public func testWWDCHelperKit() {
                 try expect(expectResult) == result
             }
             
+            $0.it("should get subtitle index URL prefix") {
+                let result = helper.getSubtitleIndexURLPrefix(with: resourceURLs) ?? ""
+                let expectResult = "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102"
+                
+                try expect(expectResult) == result
+            }
+            
             $0.it("should get subtitle index URL") {
                 let result = helper.getSubtitleIndexURL(with: resourceURLs) ?? ""
                 let expectResult = "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/subtitles/eng/prog_index.m3u8"
+                
+                try expect(expectResult) == result
+            }
+            
+            $0.it("should get webVTT URLs") {
+                let result = helper.getWebVTTURLs(with: resourceURLs)?.count ?? 0
+                let expectResult = 104
                 
                 try expect(expectResult) == result
             }

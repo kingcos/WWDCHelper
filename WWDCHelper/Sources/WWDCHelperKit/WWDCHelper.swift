@@ -109,7 +109,7 @@ extension WWDCHelper {
             let sessions = try getSessions(by: sessionIDs).sorted { $0.0.id < $0.1.id }
             _ = sessions.map { $0.output(year) }
         } else {
-            
+            downloadData()
         }
     }
     
@@ -144,7 +144,9 @@ extension WWDCHelper {
         
         return WWDCSession(id, title, resources, url)
     }
-    
+}
+
+extension WWDCHelper {
     func getSessionsInfo() -> [String : String] {
         let url = "https://developer.apple.com/videos/wwdc\(year.rawValue)/"
         let content = Network.shared.fetchContent(of: url)
@@ -157,10 +159,31 @@ extension WWDCHelper {
         return parser.parseResourceURLs(in: content)
     }
     
-    func getSubtitleIndexURL(with resources: [String]) -> String? {
+    func getSubtitleIndexURLPrefix(with resources: [String]) -> String? {
         if resources.isEmpty {
             return nil
         }
-        return parser.parseSubtitleIndexURLPrefix(in: resources[0]) + "/subtitles/eng/prog_index.m3u8"
+        return parser.parseSubtitleIndexURLPrefix(in: resources[0])
+    }
+    
+    func getSubtitleIndexURL(with resources: [String]) -> String? {
+        guard let prefix = getSubtitleIndexURLPrefix(with: resources) else { return nil }
+        return prefix + "/subtitles/eng/prog_index.m3u8"
+    }
+    
+    func getWebVTTURLs(with resources: [String]) -> [String]? {
+        guard let urlPrefix = getSubtitleIndexURLPrefix(with: resources),
+            let url = getSubtitleIndexURL(with: resources) else { return nil }
+        let content = Network.shared.fetchContent(of: url)
+        let filesCount = content
+            .components(separatedBy: "\n")
+            .filter { $0.hasPrefix("fileSequence") }
+            .count
+        
+        var result = [String]()
+        for i in 0 ..< filesCount {
+            result.append(urlPrefix + "/subtitles/\(subtitleLanguage.rawValue)/fileSequence\(i).webvtt")
+        }
+        return result
     }
 }
