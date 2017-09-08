@@ -89,11 +89,57 @@ public func testWWDCHelperKit() {
             }
             
             $0.it("get subtitle index URL prefix") {
-                let result = helper.getSubtitleIndexURLPrefix(with: resourceURLs)
-                let expectResult = "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102"
+                let result = helper.getSubtitleIndexURL(with: resourceURLs)
+                let expectResult = "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/subtitles/eng/prog_index.m3u8"
+                
+                try expect(expectResult) == result
+            }
+            
+            $0.it("init a session") {
+                let result = helper.initSession(by: "102")!
+                let expectResult = WWDCSession("102",
+                                               "Platforms State of the Union",
+                                               ["https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_of_the_union.mp4?dl=1",
+                                                "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_sd_platforms_state_of_the_union.mp4?dl=1",
+                                                "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_platforms_state_of_the_union.pdf"],
+                                               "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/subtitles/eng/prog_index.m3u8")
+                
+                try expect(expectResult) == result
+            }
+            
+            $0.it("init all sessions") {
+                let result = try! helper.initAllSessions().count
+                let expectResult = 138
                 
                 try expect(expectResult) == result
             }
         }
     }
 }
+
+public func ==(lhs: Expectation<WWDCSession>, rhs: WWDCSession) throws {
+    if let left = try lhs.expression() {
+        if left != rhs {
+            throw lhs.failure("\(String(describing: left)) is not equal to \(rhs)")
+        }
+        
+    } else {
+        throw lhs.failure("given value is nil")
+    }
+}
+
+public func ==(lhs: Expectation<[WWDCSession]>, rhs: [WWDCSession]) throws {
+    if let left = try lhs.expression() {
+        guard left.count == rhs.count else {
+            throw lhs.failure("\(String(describing: left)) is not equal to \(rhs)")
+        }
+        for i in 0 ..< left.count {
+            if left[i] != rhs[i] {
+                throw lhs.failure("\(String(describing: left)) is not equal to \(rhs)")
+            }
+        }
+    } else {
+        throw lhs.failure("given value is nil")
+    }
+}
+

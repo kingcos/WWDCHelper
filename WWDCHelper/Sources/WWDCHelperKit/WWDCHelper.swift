@@ -119,9 +119,9 @@ extension WWDCHelper {
     func initSession(by id: String) -> WWDCSession? {
         guard let title = getSessionsInfo()[id] else { return nil }
         let resources = getResourceURLs(by: id)
-        let prefix = getSubtitleIndexURLPrefix(with: resources)
+        let url = getSubtitleIndexURL(with: resources)
         
-        return WWDCSession(id, title, resources, prefix)
+        return WWDCSession(id, title, resources, url)
     }
 }
 
@@ -138,7 +138,7 @@ extension WWDCHelper {
         return parser.parseResourceURLs(in: content)
     }
     
-    func getSubtitleIndexURLPrefix(with resources: [String]) -> String {
-        return parser.parseSubtitleIndexURLPrefix(in: resources[0])
+    func getSubtitleIndexURL(with resources: [String]) -> String {
+        return parser.parseSubtitleIndexURLPrefix(in: resources[0]) + "/subtitles/eng/prog_index.m3u8"
     }
 }

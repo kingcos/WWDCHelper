@@ -57,6 +57,10 @@ extension RegexSessionInfoContentParsable {
             result.append(nsStr.substring(with: thirdRange))
         }
         
+        while result.count < 3 {
+            result.append("")
+        }
+        
         return result
     }
     
