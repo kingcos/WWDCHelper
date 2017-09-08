@@ -77,7 +77,7 @@ extension RegexSessionInfoContentParsable {
     }
 }
 
-public struct SessionContentParser: RegexSessionInfoContentParsable {
+public struct WWDC2017SessionContentParser: RegexSessionInfoContentParsable {
     let patterns: [SessionInfoType : String] = [
         .subtitleIndexURLPrefix: "(http.*)\\/.*_hd",
         .resources: "<ul class=\"links small\">[\\s\\S]*<a href=\"(https.*dl=1)\">[\\s\\S]*<a href=\"(https.*dl=1)\">[\\s\\S]*<a href=\"(https.*pdf)\">",

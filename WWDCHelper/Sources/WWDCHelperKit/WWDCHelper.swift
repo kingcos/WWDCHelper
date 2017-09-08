@@ -11,7 +11,6 @@ import PathKit
 import Rainbow
 
 public enum WWDCYear: Int {
-    case wwdc2016 = 2016
     case wwdc2017 = 2017
     case unknown
     
@@ -22,8 +21,6 @@ public enum WWDCYear: Int {
         }
         
         switch value {
-        case 16, 2016:
-            self = .wwdc2016
         case 17, 2017:
             self = .wwdc2017
         default:
@@ -73,7 +70,7 @@ public struct WWDCHelper {
     
     let isSubtitleFilenameCustom: Bool
     
-    let parser = SessionContentParser()
+    let parser = WWDC2017SessionContentParser()
     var sessionsInfo = [String : String]()
     
     public init(year: Int? = nil,
@@ -109,8 +106,8 @@ extension WWDCHelper {
         guard subtitleLanguage != .unknown else { throw HelperError.unknownSubtitleLanguage }
         
         if subtitleLanguage == .empty {
-            let sessions = try getSessions(by: sessionIDs)
-            _ = sessions.map { printSession($0) }
+            let sessions = try getSessions(by: sessionIDs).sorted { $0.0.id < $0.1.id }
+            _ = sessions.map { $0.output(year) }
         } else {
             
         }
@@ -160,25 +157,10 @@ extension WWDCHelper {
         return parser.parseResourceURLs(in: content)
     }
     
-    func getSubtitleIndexURL(with resources: [String]) -> String {
+    func getSubtitleIndexURL(with resources: [String]) -> String? {
+        if resources.isEmpty {
+            return nil
+        }
         return parser.parseSubtitleIndexURLPrefix(in: resources[0]) + "/subtitles/eng/prog_index.m3u8"
-    }
-}
-
-extension WWDCHelper {
-    func printSession(_ session: WWDCSession) {
-        print("\(session.id) - \(session.title)".bold)
-        if let hdVideo = session.resources[.hdVideo], hdVideo != "" {
-            print("\(WWDCSessionResourceType.hdVideo.rawValue) Download:", "\n\(hdVideo)".underline)
-        }
-        
-        if let sdVideo = session.resources[.sdVideo], sdVideo != "" {
-            print("\(WWDCSessionResourceType.sdVideo.rawValue) Download:", "\n\(sdVideo)".underline)
-        }
-        
-        if let pdf = session.resources[.pdf], pdf != "" {
-            print("\(WWDCSessionResourceType.pdf.rawValue) Download:", "\n\(pdf)".underline)
-        }
-        print("- - - - - - - - - -".red)
     }
 }

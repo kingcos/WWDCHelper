@@ -20,7 +20,7 @@ public func testWWDCHelperKit() {
         
         $0.describe("--- Session Content Parser ---") {
             
-            let parser = SessionContentParser()
+            let parser = WWDC2017SessionContentParser()
             
             $0.it("should parse subtitle index URL prefix") {
                 let content = "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_of_the_union.mp4?dl=1"
@@ -89,7 +89,7 @@ public func testWWDCHelperKit() {
             }
             
             $0.it("should get subtitle index URL") {
-                let result = helper.getSubtitleIndexURL(with: resourceURLs)
+                let result = helper.getSubtitleIndexURL(with: resourceURLs) ?? ""
                 let expectResult = "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/subtitles/eng/prog_index.m3u8"
                 
                 try expect(expectResult) == result
@@ -128,7 +128,27 @@ public func testWWDCHelperKit() {
                                             "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_platforms_state_of_the_union.pdf"],
                                             "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/subtitles/eng/prog_index.m3u8")
                 
-                _ = [session1, session2].map { helper.printSession($0) }
+                _ = [session1, session2].map { $0.output(helper.year) }
+            }
+            
+            $0.it("should enter helper, then print sessions") {
+                /*
+                var helper = WWDCHelper()
+                try! helper.enterHelper()
+ 
+                helper = WWDCHelper(year: 2017)
+                try! helper.enterHelper()
+                
+                helper = WWDCHelper(sessionIDs: ["102, 802"])
+                try! helper.enterHelper()
+ 
+                helper = WWDCHelper(year: 2017, sessionIDs: ["102", "802"])
+                try! helper.enterHelper()
+                */
+            }
+            
+            $0.it("should enter helper, then print sessions") {
+                
             }
         }
     }

@@ -30,7 +30,7 @@ cli.formatOutput = { s, type in
 }
 
 let yearOption = IntOption(shortFlag: "y", longFlag: "year",
-                           helpMessage: "Setup the year of WWDC. Only support 2016 & 2017 now. Default is WWDC 2017.")
+                           helpMessage: "Setup the year of WWDC. Only support 2017 now. Default is WWDC 2017.")
 let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "sessions",
                                          helpMessage: "Setup session numbers in WWDC.")
 let subtitleLanguageOption = StringOption(shortFlag: "l", longFlag: "language",

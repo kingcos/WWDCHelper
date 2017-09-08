@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Rainbow
 
 public enum WWDCSessionResourceType: String {
     case hdVideo = "HD Video"
@@ -37,6 +38,22 @@ public struct WWDCSession: Equatable {
         self.resources[.sdVideo] = resources[1]
         self.resources[.pdf] = resources[2]
         self.subtitleIndexURL = subtitleIndexURL
+    }
+    
+    func output(_ year: WWDCYear) {
+        print("WWDC \(year.rawValue) - Session \(id) - \(title)".bold)
+        if let hdVideo = resources[.hdVideo], hdVideo != "" {
+            print("\(WWDCSessionResourceType.hdVideo.rawValue) Download:", "\n\(hdVideo)".underline)
+        }
+        
+        if let sdVideo = resources[.sdVideo], sdVideo != "" {
+            print("\(WWDCSessionResourceType.sdVideo.rawValue) Download:", "\n\(sdVideo)".underline)
+        }
+        
+        if let pdf = resources[.pdf], pdf != "" {
+            print("\(WWDCSessionResourceType.pdf.rawValue) Download:", "\n\(pdf)".underline)
+        }
+        print("- - - - - - - - - -".red)
     }
 }
 
