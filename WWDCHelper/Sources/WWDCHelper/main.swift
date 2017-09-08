@@ -74,14 +74,16 @@ let year = yearOption.value
 let sessionIDs = sessionIDsOption.value
 let subtitleLanguage = subtitleLanguageOption.value
 let subtitleFilename = subtitleFilenameOption.value
+let subtitlePath = subtitlePathOption.value
 let isSubtitleForSDVideo = isSubtitleForSDVideoOption.value
 let isSubtitleForHDVideo = isSubtitleForHDVideoOption.value
-let subtitlePath = subtitlePathOption.value
 
 let helper = WWDCHelper(year: year,
                         sessionIDs: sessionIDs,
-                        language: subtitleLanguage,
+                        subtitleLanguage: subtitleLanguage,
                         subtitleFilename: subtitleFilename,
+                        subtitlePath: subtitlePath,
                         isSubtitleForSDVideo: isSubtitleForSDVideo,
-                        isSubtitleForHDVideo: isSubtitleForHDVideo,
-                        subtitlePath: subtitlePath)
+                        isSubtitleForHDVideo: isSubtitleForHDVideo)
+
+let sessions: [WWDCSession]

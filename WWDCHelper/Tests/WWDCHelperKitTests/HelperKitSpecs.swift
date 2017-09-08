@@ -25,7 +25,7 @@ public func testWWDCHelperKit() {
                 
                 try expect(expectResult) == result
             }
-            // <ul class=\"links small\">[\\s\\S]*<a href=\"(https.*dl=1)\">[\\s\\S]*<a href=\"(https.*dl=1)\">[\\s\\S]*<a href=\"(https.*pdf)\">
+            
             $0.it("should parse resources") {
                 let content = "<ul class=\"links small\">\n<li class=\"download\" data-hires-status=\"pending\">\n<ul class=\"options\">\n<li><a href=\"https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_of_the_union.mp4?dl=1\"> onclick=\"s_objectID=&quot;https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_o_1&quot;;return this.s_oc?this.s_oc(e):true\">HD Video</a></li>\n<li><a href=\"https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_sd_platforms_state_of_the_union.mp4?dl=1\"> onclick=\"s_objectID=&quot;https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_sd_platforms_state_o_1&quot;;return this.s_oc?this.s_oc(e):true\">SD Video</a></li>\n</ul>\n</li>\n\n<li class=\"document\" data-hires-status=\"pending\"><a href=\"https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_platforms_state_of_the_union.pdf\"> onclick=\"s_objectID=&quot;https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_platforms_state_of_t_1&quot;;return this.s_oc?this.s_oc(e):true\">Presentation Slides (PDF)</a></li>\n</ul>"
                 let result = parser.parseResources(in: content)
@@ -44,6 +44,15 @@ public func testWWDCHelperKit() {
                 let expectResult = [
                     "230": "Advanced Animations with UIKit"
                 ]
+                
+                try expect(expectResult) == result
+            }
+        }
+        
+        $0.describe(" --- Network ---") {
+            $0.it("should request content") {
+                let expectResult = ""
+                let result = Network.shared.requestContent(of: "")
                 
                 try expect(expectResult) == result
             }
