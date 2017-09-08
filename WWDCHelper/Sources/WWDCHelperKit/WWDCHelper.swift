@@ -73,13 +73,13 @@ public struct WWDCHelper {
     
     let parser = SessionContentParser()
     
-    public init(year: Int?,
-                sessionIDs: [String]?,
-                subtitleLanguage: String?,
-                subtitleFilename: String?,
-                subtitlePath: String?,
-                isSubtitleForSDVideo: Bool,
-                isSubtitleForHDVideo: Bool) {
+    public init(year: Int? = nil,
+                sessionIDs: [String]? = nil,
+                subtitleLanguage: String? = nil,
+                subtitleFilename: String? = nil,
+                subtitlePath: String? = nil,
+                isSubtitleForSDVideo: Bool = false,
+                isSubtitleForHDVideo: Bool = false) {
         self.year = WWDCYear(year)
         self.sessionIDs = sessionIDs ?? []
         self.subtitleLanguage = SubtitleLanguage(subtitleLanguage)
@@ -105,9 +105,12 @@ extension WWDCHelper {
         guard year != .unknown else { throw HelperError.unknownYear }
         guard subtitleLanguage != .unknown else { throw HelperError.unknownSubtitleLanguage }
         
+        let sessionsInfo = getSessionsInfo()
+        let sessionIDs = sessionsInfo.map { $0.0 }
+        
         var sessions = [WWDCSession]()
-        for key in getSessionsInfo().keys {
-            guard let session = initSession(by: key) else { continue }
+        for sessionID in sessionIDs {
+            guard let session = initSession(by: sessionID) else { continue }
             sessions.append(session)
         }
         return sessions
@@ -115,7 +118,6 @@ extension WWDCHelper {
     
     func initSession(by id: String) -> WWDCSession? {
         guard let title = getSessionsInfo()[id] else { return nil }
-        
         let resources = getResourceURLs(by: id)
         let prefix = getSubtitleIndexURLPrefix(with: resources)
         

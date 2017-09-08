@@ -32,7 +32,7 @@ public func testWWDCHelperKit() {
             
             $0.it("should parse resources") {
                 let content = "<ul class=\"links small\">\n<li class=\"download\" data-hires-status=\"pending\">\n<ul class=\"options\">\n<li><a href=\"https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_of_the_union.mp4?dl=1\"> onclick=\"s_objectID=&quot;https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_o_1&quot;;return this.s_oc?this.s_oc(e):true\">HD Video</a></li>\n<li><a href=\"https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_sd_platforms_state_of_the_union.mp4?dl=1\"> onclick=\"s_objectID=&quot;https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_sd_platforms_state_o_1&quot;;return this.s_oc?this.s_oc(e):true\">SD Video</a></li>\n</ul>\n</li>\n\n<li class=\"document\" data-hires-status=\"pending\"><a href=\"https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_platforms_state_of_the_union.pdf\"> onclick=\"s_objectID=&quot;https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_platforms_state_of_t_1&quot;;return this.s_oc?this.s_oc(e):true\">Presentation Slides (PDF)</a></li>\n</ul>"
-                let result = parser.parseResources(in: content)
+                let result = parser.parseResourceURLs(in: content)
                 let expectResult = [
                     "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_of_the_union.mp4?dl=1",
                     "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_sd_platforms_state_of_the_union.mp4?dl=1",
@@ -57,12 +57,43 @@ public func testWWDCHelperKit() {
             $0.it("should fetch content") {
                 let sampleHTML = "SampleContent.html"
                 let url = (fixturesFolderPath + sampleHTML).url
-                let expectResult = try! String(contentsOf: url)
                 let result = Network.shared.fetchContent(of: url.absoluteString)
+                let expectResult = try! String(contentsOf: url)
                 
                 try expect(expectResult) == result
             }
         }
         
+        $0.describe(" --- WWDC Helper ---") {
+            let helper = WWDCHelper()
+            var resourceURLs = [String]()
+            
+            $0.it("should get sessions info") {
+                let result = helper.getSessionsInfo().keys.count
+                let expectResult = 138
+                
+                try expect(expectResult) == result
+            }
+            
+            $0.it("should get resource URLs") {
+                let result = helper.getResourceURLs(by: "102")
+                let expectResult = [
+                    "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_of_the_union.mp4?dl=1",
+                    "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_sd_platforms_state_of_the_union.mp4?dl=1",
+                    "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_platforms_state_of_the_union.pdf"
+                ]
+                
+                resourceURLs = result
+                
+                try expect(expectResult) == result
+            }
+            
+            $0.it("get subtitle index URL prefix") {
+                let result = helper.getSubtitleIndexURLPrefix(with: resourceURLs)
+                let expectResult = "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102"
+                
+                try expect(expectResult) == result
+            }
+        }
     }
 }
