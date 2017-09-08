@@ -16,7 +16,7 @@ enum SessionInfoType {
 
 protocol SessionInfoParsable {
     func parseSubtitleIndexURLPrefix(in content: String) -> String
-    func parseResources(in content: String) -> [String]
+    func parseResourceURLs(in content: String) -> [String]
     func parseSessionsInfo(in content: String) -> [String : String]
 }
 
@@ -40,7 +40,7 @@ extension RegexSessionInfoContentParsable {
         return result
     }
     
-    func parseResources(in content: String) -> [String] {
+    func parseResourceURLs(in content: String) -> [String] {
         let nsStr = NSString(string: content)
         let regex = try! NSRegularExpression(pattern: patterns[.resources]!)
         let range = content.wholeNSRange

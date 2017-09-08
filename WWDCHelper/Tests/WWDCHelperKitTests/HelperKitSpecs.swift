@@ -9,11 +9,15 @@
 import Foundation
 import XCTest
 import Spectre
+import PathKit
 
 @testable import WWDCHelperKit
 
 public func testWWDCHelperKit() {
     describe("----- WWDCHelpKit Tests -----") {
+        
+        let fixturesFolderPath = Path(#file).parent().parent() + "Fixtures"
+        
         $0.describe("--- Session Content Parser ---") {
             
             let parser = SessionContentParser()
@@ -50,12 +54,15 @@ public func testWWDCHelperKit() {
         }
         
         $0.describe(" --- Network ---") {
-            $0.it("should request content") {
-                let expectResult = ""
-                let result = Network.shared.requestContent(of: "")
+            $0.it("should fetch content") {
+                let sampleHTML = "SampleContent.html"
+                let url = (fixturesFolderPath + sampleHTML).url
+                let expectResult = try! String(contentsOf: url)
+                let result = Network.shared.fetchContent(of: url.absoluteString)
                 
                 try expect(expectResult) == result
             }
         }
+        
     }
 }

@@ -12,7 +12,7 @@ struct Network {
     
     static let shared = Network()
     
-    func requestContent(of url: String) -> String {
+    func fetchContent(of url: String) -> String {
         let request = URLRequest(url: URL(string: url)!)
         let session = URLSession.shared
         let semaphore = DispatchSemaphore(value: 0)
