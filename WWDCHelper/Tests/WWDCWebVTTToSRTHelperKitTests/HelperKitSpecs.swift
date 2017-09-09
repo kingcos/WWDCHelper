@@ -9,11 +9,14 @@
 import Foundation
 import XCTest
 import Spectre
+import PathKit
 
 @testable import WWDCWebVTTToSRTHelperKit
 
 public func testWWDCWebVTTToSRTHelperKit() {
     describe("----- WWDCWebVTTToSRTHelperKit Tests -----") {
+        
+        let fixturesFolderPath = Path(#file).parent().parent() + "Fixtures"
         
         $0.describe("--- WebVTT Parser ---") {
             
@@ -99,6 +102,34 @@ public func testWWDCWebVTTToSRTHelperKit() {
                                     "you & them around this week."]
                 
                 try expect(expectResult) == contentArr
+            }
+            
+            $0.it("should replace characters") {
+                parser.replaceCharacters(&contentArr)
+                let expectResult = ["1",
+                                    "01:42:58,766 --> 01:43:00,516",
+                                    ">>  And with that, I hope you have a  <<",
+                                    "2",
+                                    "01:43:00,516 --> 01:43:01,546",
+                                    "great conference, and I'll see",
+                                    "you & them around this week."]
+                
+                try expect(expectResult) == contentArr
+            }
+            
+            $0.it("should parse to SRT data") {
+                var urls = [URL]()
+                for i in 0 ..< 3 {
+                    urls.append((fixturesFolderPath + "fileSequence\(i).webvtt").url)
+                }
+                let dataArr = urls.map { try! Data(contentsOf: $0) }
+                
+                guard let data = parser.parseToSRTData(dataArr),
+                    let string = String(data: data, encoding: .utf8) else { return }
+                let result = string.components(separatedBy: "\n").count
+                let expectResult = 247
+                
+                try expect(expectResult) == result
             }
         }
     }

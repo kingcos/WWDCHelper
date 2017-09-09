@@ -14,7 +14,7 @@ enum WebVTTParseType {
 }
 
 protocol WebVTTParsable {
-    func parseToSRT(_ data: [Data]) -> [Data]
+    func parseToSRTData(_ data: [Data]) -> Data?
 }
 
 protocol RegexWebVTTParsable: WebVTTParsable {
@@ -28,13 +28,18 @@ protocol RegexWebVTTParsable: WebVTTParsable {
 }
 
 extension RegexWebVTTParsable {
-    func parseToSRT(_ data: [Data]) -> [Data] {
-        var contentArr = data.map { (String(data: $0, encoding: .utf8) ?? "") }
+    func parseToSRTData(_ data: [Data]) -> Data? {
+        var contentArr = data
+            .map { (String(data: $0, encoding: .utf8) ?? "").components(separatedBy: "\n") }
+            .flatMap { $0.map { $0 } }
         removeHeader(&contentArr)
         removeBlankLines(&contentArr)
         addLineNumbers(&contentArr)
+        dealWithLines(&contentArr)
         replaceCharacters(&contentArr)
-        return [Data]()
+        return contentArr
+            .reduce("") { $0 + "\n" + $1 }
+            .data(using: .utf8)
     }
     
     func removeHeader(_ contentArr: inout [String]) {
