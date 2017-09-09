@@ -14,6 +14,4 @@ class WWDCWebVTTToSRTHelperKitTests: XCTestCase {
     func testRunSpecture() {
         testWWDCWebVTTToSRTHelperKit()
     }
-    
-    
 }

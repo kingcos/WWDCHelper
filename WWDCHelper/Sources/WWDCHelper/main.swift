@@ -35,10 +35,10 @@ let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "sessions",
                                          helpMessage: "Setup session numbers in WWDC.")
 let subtitleLanguageOption = StringOption(shortFlag: "l", longFlag: "language",
                                           helpMessage: "Setup the language of subtitle. Only support Chinese or English now. Default is Chinese.")
-let isSubtitleForSDVideoOption = BoolOption(shortFlag: "", longFlag: "sd",
-                                          helpMessage: "Setup default subtitle filename of SD video.")
-let isSubtitleForHDVideoOption = BoolOption(shortFlag: "", longFlag: "hd",
-                                          helpMessage: "Setup default subtitle filename of HD video.")
+let isSubtitleForSDVideoOption = BoolOption(longFlag: "sd",
+                                            helpMessage: "Setup default subtitle filename of SD video.")
+let isSubtitleForHDVideoOption = BoolOption(longFlag: "hd",
+                                            helpMessage: "Setup default subtitle filename of HD video.")
 let subtitlePathOption = StringOption(shortFlag: "p", longFlag: "path",
                                       helpMessage: "Setup where download the subtitle to. Default is the Download folder.")
 let helpOption = BoolOption(shortFlag: "h", longFlag: "help",
@@ -50,7 +50,7 @@ cli.addOptions(yearOption,
                sessionIDsOption,
                subtitleLanguageOption,
                isSubtitleForSDVideoOption,
-               isSubtitleForSDVideoOption,
+               isSubtitleForHDVideoOption,
                subtitlePathOption,
                helpOption,
                versionOption)
@@ -98,11 +98,9 @@ do {
         print("Language \(subtitleLanguage!) Only support Chinese or English now.".red.bold)
     case .unknownSessionID:
         print("".red.bold)
-    case .subtitleIndexURLNotFound:
-        print("".red.bold)
-    case .subtitleNotFound:
-        print("".red.bold)
     }
     
     exit(EX_USAGE)
 }
+
+

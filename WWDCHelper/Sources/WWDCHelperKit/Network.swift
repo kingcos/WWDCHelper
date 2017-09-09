@@ -23,7 +23,7 @@ struct Network {
                 print(error!.localizedDescription)
                 return
             }
-            result = String(data: data, encoding: .ascii) ?? ""
+            result = String(data: data, encoding: .utf8) ?? ""
             semaphore.signal()
         }
         

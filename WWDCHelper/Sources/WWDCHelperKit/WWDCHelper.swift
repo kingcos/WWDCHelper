@@ -45,7 +45,7 @@ public enum SubtitleLanguage: String {
         switch value {
         case "eng", "english":
             self = .english
-        case "chs", "chinese":
+        case "chn", "chinese":
             self = .chinese
         default:
             self = .unknown
@@ -57,8 +57,6 @@ public enum HelperError: Error {
     case unknownYear
     case unknownSubtitleLanguage
     case unknownSessionID
-    case subtitleIndexURLNotFound
-    case subtitleNotFound
 }
 
 public struct WWDCHelper {
@@ -104,28 +102,30 @@ extension WWDCHelper {
     func downloadData(_ sessions: [WWDCSession]) throws {
         for session in sessions {
             guard let urls = getWebVTTURLs(with: getResourceURLs(by: session.id))
-                else { throw HelperError.subtitleNotFound }
+                else { continue }
             
             let strArr = urls
                 .map { Network.shared.fetchContent(of: $0).components(separatedBy: "\n") }
                 .flatMap { $0.map { $0 } }
-
+            
             guard let result = srtHelper.parse(strArr),
                 let data = result.data(using: .utf8) else { return }
             
-            var filename = "\(session.id)_"
+            var filename = "\(session.id)"
             if isSubtitleForSDVideo {
                 filename += "_hd_"
             } else {
                 filename += "_sd_"
             }
             
-            filename += session.title.lowercased().replacingOccurrences(of: " ", with: "_")
-            filename += ".srt"
+            filename += session.title.lowercased()
+                .replacingOccurrences(of: " ", with: "_")
+                .replacingOccurrences(of: "/", with: "")
+            filename += ".eng.srt"
             
-            print(filename)
+            print(filename, "is downloading...")
             
-            try! data.write(to: (subtitlePath + filename).url)
+            try data.write(to: (subtitlePath + filename).url)
         }
     }
 }
