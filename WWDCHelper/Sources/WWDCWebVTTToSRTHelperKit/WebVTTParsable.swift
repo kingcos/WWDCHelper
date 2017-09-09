@@ -8,17 +8,22 @@
 
 import Foundation
 
+enum WebVTTParseType {
+    case timeline
+    case subtitle
+}
+
 protocol WebVTTParsable {
     func parseToSRT(_ data: [Data]) -> [Data]
 }
 
 protocol RegexWebVTTParsable: WebVTTParsable {
-    var patterns: [String] { get }
+    var patterns: [WebVTTParseType : String] { get }
     
     func removeHeader(_ contentArr: inout [String])
     func removeBlankLines(_ contentArr: inout [String])
     func addLineNumbers(_ contentArr: inout [String])
-    func dealWithTimelines(_ contentArr: inout [String])
+    func dealWithLines(_ contentArr: inout [String])
     //func replaceCharacters()
 }
 
@@ -56,11 +61,38 @@ extension RegexWebVTTParsable {
         }
     }
     
-    func dealWithTimelines(_ contentArr: inout [String]) {
+    func dealWithLines(_ contentArr: inout [String]) {
+        var result = [String]()
+        for content in contentArr {
+            let nsStr = NSString(string: content)
+            let range = content.wholeNSRange
+            let timelineRegex = try! NSRegularExpression(pattern: patterns[.timeline]!)
+            let subtitleRegex = try! NSRegularExpression(pattern: patterns[.subtitle]!)
+            let timelineMatches = timelineRegex.matches(in: content, range: range)
+            let subtitleMatches = subtitleRegex.matches(in: content, range: range)
+            
+            if !timelineMatches.isEmpty {
+                for match in timelineMatches {
+                    let firstRange = match.rangeAt(1)
+                    result.append(nsStr.substring(with: firstRange).replacingOccurrences(of: ".", with: ","))
+                }
+            } else if !subtitleMatches.isEmpty {
+                for match in subtitleMatches {
+                    let firstRange = match.rangeAt(1)
+                    result.append(nsStr.substring(with: firstRange))
+                }
+            } else {
+                result.append(content)
+            }
+        }
         
+        contentArr = result
     }
 }
 
 public struct WWDCWebVTTParser: RegexWebVTTParsable {
-    var patterns = [String]()
+    var patterns: [WebVTTParseType : String] = [
+        .timeline: "(.*-->.*[0-9]{3})",
+        .subtitle: "<.*>(.*)</.*>"
+    ]
 }
