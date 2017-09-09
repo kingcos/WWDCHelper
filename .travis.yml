@@ -1,7 +1,6 @@
 os:
   - osx
 language: generic
-xcode_project: 
 sudo: required
 dist: trusty
 osx_image: xcode8.3
