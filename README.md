@@ -1,4 +1,12 @@
-<center>![WWDCHelper Logo](logo.png)</center>
+<p align="center">
+<img src="logo.png" alt="WWDCHelper Logo" title="WWDCHelper Logo" width="675">
+</p>
+
+<p align="center">
+<img src="https://img.shields.io/badge/Swift-3.1-orange.svg">
+<img src="https://img.shields.io/badge/License-MIT-blue.svg">
+<img src="https://img.shields.io/badge/Platform-macOS-red.svg">
+</p>
 
 ## WWDC_CL
 
