@@ -1,5 +1,5 @@
 <p align="center">
-<img src="logo.png" alt="WWDCHelper Logo" title="WWDCHelper Logo" width="675">
+<img src="logo.png" alt="WWDCHelper Logo" title="WWDCHelper Logo" width="750">
 </p>
 
 <p align="center">
