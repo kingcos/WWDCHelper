@@ -161,8 +161,9 @@ public func testWWDCHelperKit() {
                 */
             }
             
-            $0.it("should enter helper, then print sessions") {
-                
+            $0.it("should enter helper, then print sessions & download subtitle") {
+                helper = WWDCHelper(subtitleLanguage: "chn")
+                try! helper.enterHelper()
             }
         }
     }

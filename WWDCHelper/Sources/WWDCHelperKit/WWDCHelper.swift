@@ -9,6 +9,7 @@
 import Foundation
 import PathKit
 import Rainbow
+import WWDCWebVTTToSRTHelperKit
 
 public enum WWDCYear: Int {
     case wwdc2017 = 2017
@@ -44,7 +45,7 @@ public enum SubtitleLanguage: String {
         switch value {
         case "eng", "english":
             self = .english
-        case "chn", "chinese":
+        case "chs", "chinese":
             self = .chinese
         default:
             self = .unknown
@@ -56,6 +57,8 @@ public enum HelperError: Error {
     case unknownYear
     case unknownSubtitleLanguage
     case unknownSessionID
+    case subtitleIndexURLNotFound
+    case subtitleNotFound
 }
 
 public struct WWDCHelper {
@@ -63,40 +66,26 @@ public struct WWDCHelper {
     public let sessionIDs: [String]?
     
     public let subtitleLanguage: SubtitleLanguage
-    public let subtitleFilename: String?
-    public let subtitlePath: Path?
+    public let subtitlePath: Path
     public let isSubtitleForSDVideo: Bool
     public let isSubtitleForHDVideo: Bool
     
-    let isSubtitleFilenameCustom: Bool
-    
     let parser = WWDC2017Parser()
+    let srtHelper = WWDCWebVTTToSRTHelper()
     var sessionsInfo = [String : String]()
     
     public init(year: Int? = nil,
                 sessionIDs: [String]? = nil,
                 subtitleLanguage: String? = nil,
-                subtitleFilename: String? = nil,
                 subtitlePath: String? = nil,
                 isSubtitleForSDVideo: Bool = false,
                 isSubtitleForHDVideo: Bool = false) {
         self.year = WWDCYear(year)
         self.sessionIDs = sessionIDs
         self.subtitleLanguage = SubtitleLanguage(subtitleLanguage)
-        self.subtitleFilename = subtitleFilename
         self.subtitlePath = Path(subtitlePath ?? ".").absolute()
-        
-        if self.subtitleFilename != nil {
-            isSubtitleFilenameCustom = true
-            
-            self.isSubtitleForSDVideo = false
-            self.isSubtitleForHDVideo = false
-        } else {
-            isSubtitleFilenameCustom = false
-            
-            self.isSubtitleForSDVideo = isSubtitleForSDVideo
-            self.isSubtitleForHDVideo = isSubtitleForHDVideo
-        }
+        self.isSubtitleForSDVideo = isSubtitleForSDVideo
+        self.isSubtitleForHDVideo = isSubtitleForHDVideo
     }
 }
 
@@ -105,16 +94,39 @@ extension WWDCHelper {
         guard year != .unknown else { throw HelperError.unknownYear }
         guard subtitleLanguage != .unknown else { throw HelperError.unknownSubtitleLanguage }
         
-        if subtitleLanguage == .empty {
-            let sessions = try getSessions(by: sessionIDs).sorted { $0.0.id < $0.1.id }
-            _ = sessions.map { $0.output(year) }
-        } else {
-            downloadData()
+        let sessions = try getSessions(by: sessionIDs).sorted { $0.0.id < $0.1.id }
+        _ = sessions.map { $0.output(year) }
+        if subtitleLanguage != .empty {
+            try downloadData(sessions)
         }
     }
     
-    func downloadData() {
-        
+    func downloadData(_ sessions: [WWDCSession]) throws {
+        for session in sessions {
+            guard let urls = getWebVTTURLs(with: getResourceURLs(by: session.id))
+                else { throw HelperError.subtitleNotFound }
+            
+            let strArr = urls
+                .map { Network.shared.fetchContent(of: $0).components(separatedBy: "\n") }
+                .flatMap { $0.map { $0 } }
+
+            guard let result = srtHelper.parse(strArr),
+                let data = result.data(using: .utf8) else { return }
+            
+            var filename = "\(session.id)_"
+            if isSubtitleForSDVideo {
+                filename += "_hd_"
+            } else {
+                filename += "_sd_"
+            }
+            
+            filename += session.title.lowercased().replacingOccurrences(of: " ", with: "_")
+            filename += ".srt"
+            
+            print(filename)
+            
+            try! data.write(to: (subtitlePath + filename).url)
+        }
     }
 }
 

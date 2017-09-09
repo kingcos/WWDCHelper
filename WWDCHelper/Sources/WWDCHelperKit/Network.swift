@@ -31,4 +31,5 @@ struct Network {
         semaphore.wait()
         return result
     }
+    
 }

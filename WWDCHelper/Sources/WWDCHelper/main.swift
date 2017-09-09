@@ -35,8 +35,6 @@ let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "sessions",
                                          helpMessage: "Setup session numbers in WWDC.")
 let subtitleLanguageOption = StringOption(shortFlag: "l", longFlag: "language",
                                           helpMessage: "Setup the language of subtitle. Only support Chinese or English now. Default is Chinese.")
-let subtitleFilenameOption = StringOption(shortFlag: "n", longFlag: "name",
-                                          helpMessage: "Setup the filename of subtitle. Default is same to session download name.")
 let isSubtitleForSDVideoOption = BoolOption(shortFlag: "", longFlag: "sd",
                                           helpMessage: "Setup default subtitle filename of SD video.")
 let isSubtitleForHDVideoOption = BoolOption(shortFlag: "", longFlag: "hd",
@@ -51,7 +49,6 @@ let versionOption = BoolOption(shortFlag: "v", longFlag: "version",
 cli.addOptions(yearOption,
                sessionIDsOption,
                subtitleLanguageOption,
-               subtitleFilenameOption,
                isSubtitleForSDVideoOption,
                isSubtitleForSDVideoOption,
                subtitlePathOption,
@@ -73,7 +70,6 @@ if helpOption.value {
 let year = yearOption.value
 let sessionIDs = sessionIDsOption.value
 let subtitleLanguage = subtitleLanguageOption.value?.lowercased()
-let subtitleFilename = subtitleFilenameOption.value
 let subtitlePath = subtitlePathOption.value
 let isSubtitleForSDVideo = isSubtitleForSDVideoOption.value
 let isSubtitleForHDVideo = isSubtitleForHDVideoOption.value
@@ -81,7 +77,6 @@ let isSubtitleForHDVideo = isSubtitleForHDVideoOption.value
 var helper = WWDCHelper(year: year,
                         sessionIDs: sessionIDs,
                         subtitleLanguage: subtitleLanguage,
-                        subtitleFilename: subtitleFilename,
                         subtitlePath: subtitlePath,
                         isSubtitleForSDVideo: isSubtitleForSDVideo,
                         isSubtitleForHDVideo: isSubtitleForHDVideo)
@@ -102,6 +97,10 @@ do {
     case .unknownSubtitleLanguage:
         print("Language \(subtitleLanguage!) Only support Chinese or English now.".red.bold)
     case .unknownSessionID:
+        print("".red.bold)
+    case .subtitleIndexURLNotFound:
+        print("".red.bold)
+    case .subtitleNotFound:
         print("".red.bold)
     }
     

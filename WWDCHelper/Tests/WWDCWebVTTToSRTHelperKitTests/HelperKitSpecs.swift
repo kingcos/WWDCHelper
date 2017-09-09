@@ -117,15 +117,15 @@ public func testWWDCWebVTTToSRTHelperKit() {
                 try expect(expectResult) == contentArr
             }
             
-            $0.it("should parse to SRT data") {
+            $0.it("should parse to SRT") {
                 var urls = [URL]()
                 for i in 0 ..< 3 {
                     urls.append((fixturesFolderPath + "fileSequence\(i).webvtt").url)
                 }
-                let dataArr = urls.map { try! Data(contentsOf: $0) }
                 
-                guard let data = parser.parseToSRTData(dataArr),
-                    let string = String(data: data, encoding: .utf8) else { return }
+                let strArr = urls.map { try! String(contentsOf: $0) }
+                
+                guard let string = parser.parseToSRT(strArr) else { return }
                 let result = string.components(separatedBy: "\n").count
                 let expectResult = 247
                 

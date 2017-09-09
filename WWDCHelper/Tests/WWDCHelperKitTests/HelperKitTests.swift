@@ -14,6 +14,4 @@ class WWDCHelperKitTests: XCTestCase {
     func testRunSpecture() {
         testWWDCHelperKit()
     }
-    
-    
 }
