@@ -5,8 +5,9 @@ import PackageDescription
 let package = Package(
     name: "WWDCHelper",
     targets: [
+        Target(name: "WWDCWebVTTToSRTHelperKit", dependencies: []),
         Target(name: "WWDCHelperKit", dependencies: []),
-        Target(name: "WWDCHelper", dependencies: ["WWDCHelperKit"])
+        Target(name: "WWDCHelper", dependencies: ["WWDCHelperKit", "WWDCWebVTTToSRTHelperKit"])
     ],
     dependencies: [
         .Package(url: "https://github.com/jatoben/CommandLine", "3.0.0-pre1"),

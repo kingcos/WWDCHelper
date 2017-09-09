@@ -18,9 +18,9 @@ public func testWWDCHelperKit() {
         
         let fixturesFolderPath = Path(#file).parent().parent() + "Fixtures"
         
-        $0.describe("--- Session Content Parser ---") {
+        $0.describe("--- WWDC 2017 Parser ---") {
             
-            let parser = WWDC2017SessionContentParser()
+            let parser = WWDC2017Parser()
             
             $0.it("should parse subtitle index URL prefix") {
                 let content = "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_of_the_union.mp4?dl=1"
@@ -53,7 +53,7 @@ public func testWWDCHelperKit() {
             }
         }
         
-        $0.describe(" --- Network ---") {
+        $0.describe("--- Network ---") {
             $0.it("should fetch content") {
                 let sampleHTML = "SampleContent.html"
                 let url = (fixturesFolderPath + sampleHTML).url
@@ -64,7 +64,7 @@ public func testWWDCHelperKit() {
             }
         }
         
-        $0.describe(" --- WWDC Helper ---") {
+        $0.describe("--- WWDC Helper ---") {
             var helper = WWDCHelper()
             var resourceURLs = [String]()
             
@@ -102,7 +102,7 @@ public func testWWDCHelperKit() {
                 try expect(expectResult) == result
             }
             
-            $0.it("should get webVTT URLs") {
+            $0.it("should get WebVTT URLs") {
                 let result = helper.getWebVTTURLs(with: resourceURLs)?.count ?? 0
                 let expectResult = 104
                 

@@ -20,11 +20,11 @@ protocol SessionInfoParsable {
     func parseSessionsInfo(in content: String) -> [String : String]
 }
 
-protocol RegexSessionInfoContentParsable: SessionInfoParsable {
+protocol RegexSessionInfoParsable: SessionInfoParsable {
     var patterns: [SessionInfoType : String] { get }
 }
 
-extension RegexSessionInfoContentParsable {
+extension RegexSessionInfoParsable {
     func parseSubtitleIndexURLPrefix(in content: String) -> String {
         let nsStr = NSString(string: content)
         let regex = try! NSRegularExpression(pattern: patterns[.subtitleIndexURLPrefix]!)
@@ -77,7 +77,7 @@ extension RegexSessionInfoContentParsable {
     }
 }
 
-public struct WWDC2017SessionContentParser: RegexSessionInfoContentParsable {
+public struct WWDC2017Parser: RegexSessionInfoParsable {
     let patterns: [SessionInfoType : String] = [
         .subtitleIndexURLPrefix: "(http.*)\\/.*_hd",
         .resources: "<ul class=\"links small\">[\\s\\S]*<a href=\"(https.*dl=1)\">[\\s\\S]*<a href=\"(https.*dl=1)\">[\\s\\S]*<a href=\"(https.*pdf)\">",

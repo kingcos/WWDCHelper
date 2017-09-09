@@ -70,7 +70,7 @@ public struct WWDCHelper {
     
     let isSubtitleFilenameCustom: Bool
     
-    let parser = WWDC2017SessionContentParser()
+    let parser = WWDC2017Parser()
     var sessionsInfo = [String : String]()
     
     public init(year: Int? = nil,
