@@ -24,7 +24,7 @@ protocol RegexWebVTTParsable: WebVTTParsable {
     func removeBlankLines(_ contentArr: inout [String])
     func addLineNumbers(_ contentArr: inout [String])
     func dealWithLines(_ contentArr: inout [String])
-    //func replaceCharacters()
+    func replaceCharacters(_ contentArr: inout [String])
 }
 
 extension RegexWebVTTParsable {
@@ -33,6 +33,7 @@ extension RegexWebVTTParsable {
         removeHeader(&contentArr)
         removeBlankLines(&contentArr)
         addLineNumbers(&contentArr)
+        replaceCharacters(&contentArr)
         return [Data]()
     }
     
@@ -87,6 +88,14 @@ extension RegexWebVTTParsable {
         }
         
         contentArr = result
+    }
+    
+    func replaceCharacters(_ contentArr: inout [String]) {
+        contentArr = contentArr.map {
+            $0.replacingOccurrences(of: "&gt;", with: ">")
+            .replacingOccurrences(of: "&lt;", with: "<")
+            .replacingOccurrences(of: "&amp;", with: "&")
+        }
     }
 }
 

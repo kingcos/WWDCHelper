@@ -22,14 +22,14 @@ public func testWWDCWebVTTToSRTHelperKit() {
                               "X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000",
                               "",
                               "01:42:58.766 --> 01:43:00.516 A:middle",
-                              "And with that, I hope you have a",
+                              "&gt;&gt;  And with that, I hope you have a  &lt;&lt;",
                               "",
                               "WEBVTT",
                               "X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000",
                               "",
                               "01:43:00.516 --> 01:43:01.546 A:middle",
                               "<c.magenta>great conference, and I'll see</c>",
-                              "<c.magenta>you around this week.</c>",
+                              "<c.magenta>you &amp; them around this week.</c>",
                               ""]
             
             $0.it("should remove header") {
@@ -38,14 +38,14 @@ public func testWWDCWebVTTToSRTHelperKit() {
                                     "",
                                     "",
                                     "01:42:58.766 --> 01:43:00.516 A:middle",
-                                    "And with that, I hope you have a",
+                                    "&gt;&gt;  And with that, I hope you have a  &lt;&lt;",
                                     "",
                                     "",
                                     "",
                                     "",
                                     "01:43:00.516 --> 01:43:01.546 A:middle",
                                     "<c.magenta>great conference, and I'll see</c>",
-                                    "<c.magenta>you around this week.</c>",
+                                    "<c.magenta>you &amp; them around this week.</c>",
                                     ""]
                 
                 try expect(expectResult) == contentArr
@@ -54,10 +54,10 @@ public func testWWDCWebVTTToSRTHelperKit() {
             $0.it("should remove blank lines") {
                 parser.removeBlankLines(&contentArr)
                 let expectResult = ["01:42:58.766 --> 01:43:00.516 A:middle",
-                                    "And with that, I hope you have a",
+                                    "&gt;&gt;  And with that, I hope you have a  &lt;&lt;",
                                     "01:43:00.516 --> 01:43:01.546 A:middle",
                                     "<c.magenta>great conference, and I'll see</c>",
-                                    "<c.magenta>you around this week.</c>"]
+                                    "<c.magenta>you &amp; them around this week.</c>"]
                 
                 try expect(expectResult) == contentArr
             }
@@ -66,11 +66,11 @@ public func testWWDCWebVTTToSRTHelperKit() {
                 parser.addLineNumbers(&contentArr)
                 let expectResult = ["1",
                                     "01:42:58.766 --> 01:43:00.516 A:middle",
-                                    "And with that, I hope you have a",
+                                    "&gt;&gt;  And with that, I hope you have a  &lt;&lt;",
                                     "2",
                                     "01:43:00.516 --> 01:43:01.546 A:middle",
                                     "<c.magenta>great conference, and I'll see</c>",
-                                    "<c.magenta>you around this week.</c>"]
+                                    "<c.magenta>you &amp; them around this week.</c>"]
                 
                 try expect(expectResult) == contentArr
             }
@@ -79,11 +79,24 @@ public func testWWDCWebVTTToSRTHelperKit() {
                 parser.dealWithLines(&contentArr)
                 let expectResult = ["1",
                                     "01:42:58,766 --> 01:43:00,516",
-                                    "And with that, I hope you have a",
+                                    "&gt;&gt;  And with that, I hope you have a  &lt;&lt;",
                                     "2",
                                     "01:43:00,516 --> 01:43:01,546",
                                     "great conference, and I'll see",
-                                    "you around this week."]
+                                    "you &amp; them around this week."]
+                
+                try expect(expectResult) == contentArr
+            }
+            
+            $0.it("should replace characters") {
+                parser.replaceCharacters(&contentArr)
+                let expectResult = ["1",
+                                    "01:42:58,766 --> 01:43:00,516",
+                                    ">>  And with that, I hope you have a  <<",
+                                    "2",
+                                    "01:43:00,516 --> 01:43:01,546",
+                                    "great conference, and I'll see",
+                                    "you & them around this week."]
                 
                 try expect(expectResult) == contentArr
             }
