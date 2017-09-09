@@ -162,12 +162,14 @@ public func testWWDCHelperKit() {
             }
             
             $0.it("should enter helper, then print sessions & download subtitle") {
+                /*
                 helper = WWDCHelper(subtitleLanguage: "eng")
                 do {
                     try helper.enterHelper()
                 } catch let error {
                     print(error.localizedDescription)
                 }
+                */
             }
         }
     }
