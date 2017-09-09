@@ -1,6 +1,4 @@
-# Learning-WWDC
-
-WWDC_CL & WWDC notes & code
+<center>![WWDCHelper Logo](logo.png)</center>
 
 ## WWDC_CL
 
