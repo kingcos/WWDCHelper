@@ -10,25 +10,25 @@
 <img src="https://img.shields.io/badge/License-MIT-blue.svg">
 </p>
 
-[中文版 README](README_CN.md)
+> 受 qiaoxueshi/WWDC_2015_Video_Subtitle，ohoachuck/wwdc-downloader，以及 @onevcat 的视频启发。感谢他们的灵感与努力。👏
 
-> Inspired by qiaoxueshi/WWDC_2015_Video_Subtitle, ohoachuck/wwdc-downloader, and @onevcat's videos. Thanks for their inspiration and efforts. 👏
+[English Version README](README.md)
 
-## Info
+## 简介
 
-WWDCHelper is a command line tool on macOS for you to get WWDC info easily. Now you can get download links of SD/HD video & PDF, and download subtitles in English or **Simplified Chinese** directly by it.
+WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资源。现在，你可以用它直接获取 SD/HD 视频和对应 PDF 文档的链接，也可以直接下载英文或**简体中文**的字幕。
 
-You can also download subtitles at the [releases](https://github.com/kingcos/WWDCHelper/releases) page only.
+当然，你也可以直接在 [releases](https://github.com/kingcos/WWDCHelper/releases) 页面仅下载 WWDC 2017 的所有字幕。
 
-> **Notice:**
+> **提示**
 > 
-> Although I have written in Swift for years, I still have a lot to learn about Swift. And to be honest, CLI (Command Line Interface) is not familiar for me. So this program is not perfect, even a little wired. So you can issue me if you have any questions, advices or find some bugs . I will be very appreciated for your help. ❤️
+> 虽然确实写了几年 Swift，但仍有不足，仍有差距。加上对命令行程序的不太了解，可能该项目并非很好，甚至有点怪异。如果您找到了问题、或是建议、又或是 Bug，都欢迎您提出 Issue。我会非常感谢您的帮助。❤️
 
-## How
+## 如何使用
 
-### Install
+### 安装
 
-You should have [Swift Package Manager](https://swift.org/package-manager/) installed or latest Xcode installed with command line tools in your macOS.
+您的 macOS 需要安装了 [Swift Package Manager](https://swift.org/package-manager/)，或者安装了最新版本的 Xcode 并带有命令行工具。
 
 ```sh
 > git clone https://github.com/kingcos/WWDCHelper.git
@@ -36,7 +36,7 @@ You should have [Swift Package Manager](https://swift.org/package-manager/) inst
 > ./install.sh
 ```
 
-### Run
+### 运行
 
 ```sh
 > wwdchelper -h
@@ -61,7 +61,7 @@ Usage: WWDCHelper [options]
 
 ### Demo
 
-- If you want just Session 102 & 202 info of WWDC 2017:
+- 如果您仅需要 WWDC 2017 中 Session 102 和 202 的信息：
 
 ```sh
 > wwdchelper -s 102 202
@@ -69,32 +69,32 @@ or
 > wwdchelper -y 17 -s 102 202
 ```
 
-### NOT Implemented
+### 未实现
 
-> Maybe implement these features in the future.
+> 可能会在未来实现以下特点：
 
-- [x] Download multiple subtitles at once
-- [ ] Support subtitles in Traditional Chinese
-- [ ] Support subtitles in both English & Chinese
-- [ ] Support WWDC before 2017
-- [ ] Support for Linux 🐧
+- [x] 一次性下载多个字幕
+- [ ] 支持繁体中文字幕
+- [ ] 支持中英字幕（同时）
+- [ ] 支持早于 WWDC 2017
+- [ ] 支持 Linux 🐧
 
-### Reference
+### 参考
 
 - [qiaoxueshi/WWDC_2015_Video_Subtitle](https://github.com/qiaoxueshi/WWDC_2015_Video_Subtitle)
 - [ohoachuck/wwdc-downloader](https://github.com/ohoachuck/wwdc-downloader)
 - [onevcat/FengNiao](https://github.com/onevcat/FengNiao)
 
-## WWDC 17 - Notes
+## WWDC 17 - 笔记
 
 - [102 - Platforms State of the Union](/2017/102)
 
-### Design
+### 设计
 
 - [819 - Designing for a Global Audience](/2017/819)
 - [822 - App Icon Design](/2017/822)
 - [823 - Designing Glyphs](/2017/823)
 
-## LICENSE
+## 许可
 
 MIT
