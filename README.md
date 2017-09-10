@@ -77,10 +77,10 @@ or
 > wwdchelper --year 2017 --sessions 102 202 --language eng --sd
 ```
 
-- If you want to download all subtitles in English for HD videos, and specify the path:
+- If you want to download **all** subtitles in English for HD videos, and specify the path (**NOT recommend**):
 
 ```sh
-> wwdchelper -l eng -p /Users/kingcos/Downloads/
+> wwdchelper -l eng -p /Users/kingcos/Downloads/hd/eng/
 ```
 
 ### NOT Implemented
