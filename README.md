@@ -59,12 +59,28 @@ Usage: WWDCHelper [options]
 
 ### Demo
 
-- If you want just Session 102 & 202 info of WWDC 2017:
+- If you just want to get Session 102 & 202 info of WWDC 2017:
 
 ```sh
 > wwdchelper -s 102 202
 or
 > wwdchelper -y 17 -s 102 202
+or
+> wwdchelper --year 2017 --sesions 102 202
+```
+
+- If you want to download subtitles in English of Session 102 & 202 for SD videos:
+
+```sh
+> wwdchelper -s 102 202 -l eng --sd
+or
+> wwdchelper --year 2017 --sessions 102 202 --language eng --sd
+```
+
+- If you want to download all subtitles in English for HD videos, and specify the path:
+
+```sh
+> wwdchelper -l eng -p /Users/kingcos/Downloads/
 ```
 
 ### NOT Implemented

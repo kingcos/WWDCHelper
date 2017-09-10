@@ -91,29 +91,22 @@ extension WWDCHelper {
         guard subtitleLanguage != .unknown else { throw HelperError.unknownSubtitleLanguage }
         
         let sessions = try getSessions(by: sessionIDs).sorted { $0.0.id < $0.1.id }
-        _ = sessions.map { $0.output(year) }
+        
         if subtitleLanguage != .empty {
             if !subtitlePath.exists {
                 throw HelperError.subtitlePathNotExist
             } else {
-                print("Please wait a little while. Start downloading...")
                 try downloadData(sessions)
             }
+        } else {
+            _ = sessions.map { $0.output(year) }
         }
     }
     
     func downloadData(_ sessions: [WWDCSession]) throws {
+        print("Start downloading...")
+        
         for session in sessions {
-            guard let urls = getWebVTTURLs(with: getResourceURLs(by: session.id))
-                else { continue }
-            
-            let strArr = urls
-                .map { Network.shared.fetchContent(of: $0).components(separatedBy: "\n") }
-                .flatMap { $0.map { $0 } }
-            
-            guard let result = srtHelper.parse(strArr),
-                let data = result.data(using: .utf8) else { return }
-            
             var filename = "\(session.id)"
             if isSubtitleForSDVideo {
                 filename += "_sd_"
@@ -133,10 +126,21 @@ extension WWDCHelper {
                 continue
             }
             
+            guard let urls = getWebVTTURLs(with: getResourceURLs(by: session.id))
+                else { continue }
+            
+            let strArr = urls
+                .map { Network.shared.fetchContent(of: $0).components(separatedBy: "\n") }
+                .flatMap { $0.map { $0 } }
+            
+            guard let result = srtHelper.parse(strArr),
+                let data = result.data(using: .utf8) else { return }
+            
             print(filename, "is downloading...")
             
             try data.write(to: path.url)
         }
+        print("Download successfully.".green.bold)
     }
 }
 

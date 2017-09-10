@@ -65,6 +65,22 @@ Usage: WWDCHelper [options]
 > wwdchelper -s 102 202
 or
 > wwdchelper -y 17 -s 102 202
+or
+> wwdchelper --year 2017 --sesions 102 202
+```
+
+- 如果您想要为 Session 102 和 202 的 SD（清晰度）视频下载简体中文字幕：
+
+```sh
+> wwdchelper -s 102 202 -l chs --sd
+or
+> wwdchelper --year 2017 --sessions 102 202 --language chs --sd
+```
+
+- 如果您想要为所有 Session 的 HD（清晰度）视频下载简体中文字幕，并指定路径：
+
+```sh
+> wwdchelper -l chs -p /Users/kingcos/Downloads/
 ```
 
 ### 未实现
