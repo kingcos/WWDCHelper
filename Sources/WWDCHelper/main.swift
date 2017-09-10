@@ -83,10 +83,11 @@ var helper = WWDCHelper(year: year,
                         isSubtitleForSDVideo: isSubtitleForSDVideo)
 
 do {
-    print("Welcome to WWDCHelper by kingcos! 👏")
+    print("Welcome to WWDCHelper by github.com/kingcos! 👏")
     print("Please wait a little while. Helper is trying to fetch your favorite data hard...")
     try helper.enterHelper()
 } catch {
+    print("If you have any issues, please contact with me at github.com/kingcos.")
     guard let err = error as? HelperError else {
         print("Unknown Error: \(error)".red.bold)
         exit(EX_USAGE)
