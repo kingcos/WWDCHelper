@@ -1,5 +1,5 @@
 <p align="center">
-<img src="logo.png" alt="WWDCHelper Logo" title="WWDCHelper Logo" width="450">
+<img src="resources/logo.png" alt="WWDCHelper Logo" title="WWDCHelper Logo" width="450">
 </p>
 
 <p align="center">
@@ -18,7 +18,7 @@
 
 WWDCHelper is a command line tool on macOS for you to get WWDC info easily. Now you can get download links of SD/HD video & PDF, and download subtitles in English or **Simplified Chinese** directly by it.
 
-You can also download subtitles at the [releases](https://github.com/kingcos/WWDCHelper/releases) page only.
+You can also download subtitles at the [releases](https://github.com/kingcos/WWDCHelper/releases) page.
 
 > **Notice:**
 > 
@@ -42,21 +42,19 @@ You should have [Swift Package Manager](https://swift.org/package-manager/) inst
 > wwdchelper -h
 Usage: WWDCHelper [options]
   -y, --year:
-      Setup the year of WWDC. Only support 2017 now. Default is WWDC 2017.
+      Setup the year of WWDC. Only support `17` or `2017` now. Default is WWDC 2017.
   -s, --sessions:
-      Setup session numbers in WWDC.
+      Setup session numbers in WWDC. Default is all.
   -l, --language:
-      Setup the language of subtitle. Only support Chinese or English now. Default is Chinese.
+      Setup language of subtitle. Only support `chs` or `eng` now. Default is Simplified Chinese.
   --sd:
-      Setup default subtitle filename of SD video.
-  --hd:
-      Setup default subtitle filename of HD video.
+      Add sd tag for subtitle filename. Default is for hd.
   -p, --path:
-      Setup where download the subtitle to. Default is the Download folder.
+      Setup download path of subtitles. Default is current folder.
   -h, --help:
-      Print this help info.
+      Print the help info.
   -v, --version:
-      Print version info.
+      Print the version info.
 ```
 
 ### Demo
@@ -83,6 +81,7 @@ or
 
 - [qiaoxueshi/WWDC_2015_Video_Subtitle](https://github.com/qiaoxueshi/WWDC_2015_Video_Subtitle)
 - [ohoachuck/wwdc-downloader](https://github.com/ohoachuck/wwdc-downloader)
+- [onevcat](https://github.com/onevcat)
 - [onevcat/FengNiao](https://github.com/onevcat/FengNiao)
 
 ## WWDC 17 - Notes

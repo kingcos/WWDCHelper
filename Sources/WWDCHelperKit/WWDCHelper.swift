@@ -31,8 +31,8 @@ public enum WWDCYear: Int {
 }
 
 public enum SubtitleLanguage: String {
-    case english = "eng"
-    case chinese = "zho"
+    case eng = "eng"
+    case chs = "zho"
     case empty
     case unknown
     
@@ -43,10 +43,10 @@ public enum SubtitleLanguage: String {
         }
         
         switch value {
-        case "eng", "english":
-            self = .english
-        case "chn", "chinese":
-            self = .chinese
+        case "eng":
+            self = .eng
+        case "chs":
+            self = .chs
         default:
             self = .unknown
         }
@@ -57,6 +57,7 @@ public enum HelperError: Error {
     case unknownYear
     case unknownSubtitleLanguage
     case unknownSessionID
+    case subtitlePathNotExist
 }
 
 public struct WWDCHelper {
@@ -66,7 +67,6 @@ public struct WWDCHelper {
     public let subtitleLanguage: SubtitleLanguage
     public let subtitlePath: Path
     public let isSubtitleForSDVideo: Bool
-    public let isSubtitleForHDVideo: Bool
     
     let parser = WWDC2017Parser()
     let srtHelper = WWDCWebVTTToSRTHelper()
@@ -76,14 +76,12 @@ public struct WWDCHelper {
                 sessionIDs: [String]? = nil,
                 subtitleLanguage: String? = nil,
                 subtitlePath: String? = nil,
-                isSubtitleForSDVideo: Bool = false,
-                isSubtitleForHDVideo: Bool = false) {
+                isSubtitleForSDVideo: Bool = false) {
         self.year = WWDCYear(year)
         self.sessionIDs = sessionIDs
         self.subtitleLanguage = SubtitleLanguage(subtitleLanguage)
         self.subtitlePath = Path(subtitlePath ?? ".").absolute()
         self.isSubtitleForSDVideo = isSubtitleForSDVideo
-        self.isSubtitleForHDVideo = isSubtitleForHDVideo
     }
 }
 
@@ -95,7 +93,12 @@ extension WWDCHelper {
         let sessions = try getSessions(by: sessionIDs).sorted { $0.0.id < $0.1.id }
         _ = sessions.map { $0.output(year) }
         if subtitleLanguage != .empty {
-            try downloadData(sessions)
+            if !subtitlePath.exists {
+                throw HelperError.subtitlePathNotExist
+            } else {
+                print("Please wait a little while. Start downloading...")
+                try downloadData(sessions)
+            }
         }
     }
     
@@ -113,19 +116,26 @@ extension WWDCHelper {
             
             var filename = "\(session.id)"
             if isSubtitleForSDVideo {
-                filename += "_hd_"
-            } else {
                 filename += "_sd_"
+            } else {
+                filename += "_hd_"
             }
             
             filename += session.title.lowercased()
                 .replacingOccurrences(of: " ", with: "_")
                 .replacingOccurrences(of: "/", with: "")
-            filename += ".eng.srt"
+            filename = filename + "." + (subtitleLanguage == .chs ? "chs" : "eng") + ".srt"
+            
+            let path = subtitlePath + filename
+            
+            guard !FileManager.default.fileExists(atPath: path.string) else {
+                print("\(filename) already exists, skip to download.")
+                continue
+            }
             
             print(filename, "is downloading...")
             
-            try data.write(to: (subtitlePath + filename).url)
+            try data.write(to: path.url)
         }
     }
 }

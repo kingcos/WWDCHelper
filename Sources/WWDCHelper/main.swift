@@ -11,6 +11,7 @@ import CommandLineKit
 import Rainbow
 import WWDCHelperKit
 
+let appVersion = "v0.1.0"
 let cli = CommandLineKit.CommandLine()
 
 cli.formatOutput = { s, type in
@@ -30,27 +31,24 @@ cli.formatOutput = { s, type in
 }
 
 let yearOption = IntOption(shortFlag: "y", longFlag: "year",
-                           helpMessage: "Setup the year of WWDC. Only support 2017 now. Default is WWDC 2017.")
+                           helpMessage: "Setup the year of WWDC. Only support `17` or `2017` now. Default is WWDC 2017.")
 let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "sessions",
-                                         helpMessage: "Setup session numbers in WWDC.")
+                                         helpMessage: "Setup session numbers in WWDC. Default is all.")
 let subtitleLanguageOption = StringOption(shortFlag: "l", longFlag: "language",
-                                          helpMessage: "Setup the language of subtitle. Only support Chinese or English now. Default is Chinese.")
+                                          helpMessage: "Setup language of subtitle. Only support `chs` or `eng` now. Default is Simplified Chinese.")
 let isSubtitleForSDVideoOption = BoolOption(longFlag: "sd",
-                                            helpMessage: "Setup default subtitle filename of SD video.")
-let isSubtitleForHDVideoOption = BoolOption(longFlag: "hd",
-                                            helpMessage: "Setup default subtitle filename of HD video.")
+                                            helpMessage: "Add sd tag for subtitle filename. Default is for hd.")
 let subtitlePathOption = StringOption(shortFlag: "p", longFlag: "path",
-                                      helpMessage: "Setup where download the subtitle to. Default is the Download folder.")
+                                      helpMessage: "Setup download path of subtitles. Default is current folder.")
 let helpOption = BoolOption(shortFlag: "h", longFlag: "help",
-                            helpMessage: "Print this help info.")
+                            helpMessage: "Print the help info.")
 let versionOption = BoolOption(shortFlag: "v", longFlag: "version",
-                               helpMessage: "Print version info.")
+                               helpMessage: "Print the version info.")
 
 cli.addOptions(yearOption,
                sessionIDsOption,
                subtitleLanguageOption,
                isSubtitleForSDVideoOption,
-               isSubtitleForHDVideoOption,
                subtitlePathOption,
                helpOption,
                versionOption)
@@ -67,19 +65,22 @@ if helpOption.value {
     exit(EX_OK)
 }
 
+if versionOption.value {
+    print(appVersion)
+    exit(EX_OK);
+}
+
 let year = yearOption.value
 let sessionIDs = sessionIDsOption.value
 let subtitleLanguage = subtitleLanguageOption.value?.lowercased()
 let subtitlePath = subtitlePathOption.value
 let isSubtitleForSDVideo = isSubtitleForSDVideoOption.value
-let isSubtitleForHDVideo = isSubtitleForHDVideoOption.value
 
 var helper = WWDCHelper(year: year,
                         sessionIDs: sessionIDs,
                         subtitleLanguage: subtitleLanguage,
                         subtitlePath: subtitlePath,
-                        isSubtitleForSDVideo: isSubtitleForSDVideo,
-                        isSubtitleForHDVideo: isSubtitleForHDVideo)
+                        isSubtitleForSDVideo: isSubtitleForSDVideo)
 
 do {
     print("Welcome to WWDCHelper by kingcos! 👏")
@@ -95,9 +96,11 @@ do {
     case .unknownYear:
         print("WWDC \(year!) isn't been supported currently. Only support 2016 & 2017 now.".red.bold)
     case .unknownSubtitleLanguage:
-        print("Language \(subtitleLanguage!) Only support Chinese or English now.".red.bold)
+        print("Language \(subtitleLanguage!) Only support Simpliefied Chinese or English now.".red.bold)
     case .unknownSessionID:
-        print("".red.bold)
+        print("Session ID was not found".red.bold)
+    case .subtitlePathNotExist:
+        print("Subtitle path does not exist.")
     }
     
     exit(EX_USAGE)
