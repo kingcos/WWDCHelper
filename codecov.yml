@@ -3,4 +3,5 @@ comment:
 coverage:
   ignore:
   - Tests
-  
+  - resources
+  - 2017
