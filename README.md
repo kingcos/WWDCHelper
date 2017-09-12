@@ -42,7 +42,7 @@ You should have [Swift Package Manager](https://swift.org/package-manager/) inst
 > wwdchelper -h
 Usage: WWDCHelper [options]
   -y, --year:
-      Setup the year of WWDC. Only support `17` or `2017` now. Default is WWDC 2017.
+      Setup the year of WWDC. Support `WWDC2017` & `Fall2017` now. Default is WWDC 2017.
   -s, --sessions:
       Setup session numbers in WWDC. Default is all.
   -l, --language:
@@ -58,6 +58,22 @@ Usage: WWDCHelper [options]
 ```
 
 ### Demo
+
+- *Update*: If you want to get all sessions info of Fall 2017 (Including videos' download links):：
+
+```sh
+> wwdchelper -y fall2017
+```
+
+- *Update*: - If you want to download subtitles in English of Fall 2017：
+
+```sh
+# HD Videos：
+> wwdchelper -y fall2017 -l eng
+or
+# SD Videos：
+> wwdchelper -y fall2017 --sd -l eng
+```
 
 - If you just want to get Session 102 & 202 info of WWDC 2017:
 
@@ -87,6 +103,7 @@ or
 
 > Maybe implement these features in the future.
 
+- [x] Support Fall 2017
 - [x] Download multiple subtitles at once
 - [ ] Support subtitles in Traditional Chinese
 - [ ] Support subtitles in both English & Chinese

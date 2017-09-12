@@ -18,7 +18,7 @@
 
 WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资源。现在，你可以用它直接获取 SD/HD 视频和对应 PDF 文档的链接，也可以直接下载英文或**简体中文**的字幕。
 
-当然，你也可以直接在 [releases](https://github.com/kingcos/WWDCHelper/releases) 页面仅下载 WWDC 2017 的所有字幕。
+当然，你也可以直接在 [releases](https://github.com/kingcos/WWDCHelper/releases) 页面仅下载 WWDC 2017 或 Fall 2017 的所有字幕。
 
 > **提示**
 > 
@@ -42,7 +42,7 @@ WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资�
 > wwdchelper -h
 Usage: WWDCHelper [options]
   -y, --year:
-      Setup the year of WWDC. Only support `17` or `2017` now. Default is WWDC 2017.
+      Setup the year of WWDC. Support `WWDC2017` & `Fall2017` now. Default is WWDC 2017.
   -s, --sessions:
       Setup session numbers in WWDC. Default is all.
   -l, --language:
@@ -58,6 +58,22 @@ Usage: WWDCHelper [options]
 ```
 
 ### Demo
+
+- *Update*: 如果您需要获取 Fall 2017 所有 Session 信息（包括视频的下载链接）：
+
+```sh
+> wwdchelper -y fall2017
+```
+
+- *Update*: 如果您需要下载 Fall 2017 所有英文字幕（目前官网暂未放出中文字幕）：
+
+```sh
+# HD 视频：
+> wwdchelper -y fall2017 -l eng
+or
+# SD 视频：
+> wwdchelper -y fall2017 --sd -l eng
+```
 
 - 如果您仅需要 WWDC 2017 中 Session 102 和 202 的信息：
 
@@ -87,6 +103,7 @@ or
 
 > 可能会在未来实现以下特点：
 
+- [x] 率先支持 Fall 2017
 - [x] 一次性下载多个字幕
 - [ ] 支持繁体中文字幕
 - [ ] 支持中英字幕（同时）

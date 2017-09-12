@@ -11,7 +11,7 @@ import CommandLineKit
 import Rainbow
 import WWDCHelperKit
 
-let appVersion = "v0.1.0"
+let appVersion = "v0.2.0"
 let cli = CommandLineKit.CommandLine()
 
 cli.formatOutput = { s, type in
@@ -30,8 +30,8 @@ cli.formatOutput = { s, type in
     return cli.defaultFormat(s: str, type: type)
 }
 
-let yearOption = IntOption(shortFlag: "y", longFlag: "year",
-                           helpMessage: "Setup the year of WWDC. Only support `17` or `2017` now. Default is WWDC 2017.")
+let yearOption = StringOption(shortFlag: "y", longFlag: "year",
+                              helpMessage: "Setup the year of WWDC. Support `WWDC2017` & `Fall2017` now. Default is WWDC 2017.")
 let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "sessions",
                                          helpMessage: "Setup session numbers in WWDC. Default is all.")
 let subtitleLanguageOption = StringOption(shortFlag: "l", longFlag: "language",
