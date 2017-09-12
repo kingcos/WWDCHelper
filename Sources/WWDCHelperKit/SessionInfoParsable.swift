@@ -77,10 +77,36 @@ extension RegexSessionInfoParsable {
     }
 }
 
-public struct WWDC2017Parser: RegexSessionInfoParsable {
+public class WWDC2017Parser: RegexSessionInfoParsable {
     let patterns: [SessionInfoType : String] = [
         .subtitleIndexURLPrefix: "(http.*)\\/.*_hd",
         .resources: "<ul class=\"links small\">[\\s\\S]*<a href=\"(https.*dl=1)\">[\\s\\S]*<a href=\"(https.*dl=1)\">[\\s\\S]*<a href=\"(https.*pdf)\">",
-        .sessionsInfo: "<a href=\"\\/videos\\/play\\/wwdc[0-9]{4}\\/([0-9]*)\\/\".*\\n.*<h4.*>(.*)</h4>"
+        .sessionsInfo: "<a href=\"\\/videos\\/play\\/[\\S]{8}\\/([0-9]*)\\/\".*\\n.*<h4.*>(.*)</h4>"
     ]
+}
+
+public class Fall2017Parser: RegexSessionInfoParsable {
+    let patterns: [SessionInfoType : String] = [
+        .subtitleIndexURLPrefix: "(http.*)\\/.*_hd",
+        .resources: "<ul class=\"links small\">[\\s\\S]*<a href=\"(https.*dl=1)\">[\\s\\S]*<a href=\"(https.*dl=1)\">",
+        .sessionsInfo: "<a href=\"\\/videos\\/play\\/[\\S]{8}\\/([0-9]*)\\/\".*\\n.*<h4.*>(.*)</h4>"
+    ]
+    
+    func parseResourceURLs(in content: String) -> [String] {
+        let nsStr = NSString(string: content)
+        let regex = try! NSRegularExpression(pattern: patterns[.resources]!)
+        let range = content.wholeNSRange
+        let matches = regex.matches(in: content, range: range)
+        
+        var result = [String]()
+        for match in matches {
+            let firstRange = match.rangeAt(1)
+            let secondRange = match.rangeAt(2)
+            
+            result.append(nsStr.substring(with: firstRange))
+            result.append(nsStr.substring(with: secondRange))
+        }
+        
+        return result
+    }
 }
