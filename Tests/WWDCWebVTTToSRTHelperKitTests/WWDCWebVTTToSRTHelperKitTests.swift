@@ -1,5 +1,5 @@
 //
-//  HelperKitTests.swift
+//  WWDCWebVTTToSRTHelperKitTests.swift
 //  WWDCWebVTTToSRTHelperKitTests
 //
 //  Created by kingcos on 09/09/2017.

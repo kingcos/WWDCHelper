@@ -77,10 +77,10 @@ or
 > wwdchelper --year 2017 --sessions 102 202 --language chs --sd
 ```
 
-- 如果您想要为所有 Session 的 HD（清晰度）视频下载简体中文字幕，并指定路径：
+- 如果您想要为**所有** Session 的 HD（清晰度）视频下载简体中文字幕，并指定路径（**不推荐**）：
 
 ```sh
-> wwdchelper -l chs -p /Users/kingcos/Downloads/
+> wwdchelper -l chs -p /Users/kingcos/Downloads/hd/chs/
 ```
 
 ### 未实现
