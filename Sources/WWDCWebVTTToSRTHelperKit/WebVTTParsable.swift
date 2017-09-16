@@ -58,11 +58,13 @@ extension RegexWebVTTParsable {
         while i < contentArr.count {
             if contentArr[i].contains("-->") {
                 contentArr.insert("\(n)", at: i)
+                contentArr.insert("", at: i)
                 n += 1
-                i += 1
+                i += 2
             }
             i += 1
         }
+        contentArr.removeFirst()
     }
     
     func dealWithLines(_ contentArr: inout [String]) {

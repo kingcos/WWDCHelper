@@ -11,7 +11,7 @@ import CommandLineKit
 import Rainbow
 import WWDCHelperKit
 
-let appVersion = "v0.2.0"
+let appVersion = "v0.3.0"
 let cli = CommandLineKit.CommandLine()
 
 cli.formatOutput = { s, type in
