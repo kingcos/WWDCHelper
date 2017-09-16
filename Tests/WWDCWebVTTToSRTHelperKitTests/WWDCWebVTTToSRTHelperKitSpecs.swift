@@ -70,6 +70,7 @@ public func testWWDCWebVTTToSRTHelperKit() {
                 let expectResult = ["1",
                                     "01:42:58.766 --> 01:43:00.516 A:middle",
                                     "&gt;&gt;  And with that, I hope you have a  &lt;&lt;",
+                                    "",
                                     "2",
                                     "01:43:00.516 --> 01:43:01.546 A:middle",
                                     "<c.magenta>great conference, and I'll see</c>",
@@ -83,6 +84,7 @@ public func testWWDCWebVTTToSRTHelperKit() {
                 let expectResult = ["1",
                                     "01:42:58,766 --> 01:43:00,516",
                                     "&gt;&gt;  And with that, I hope you have a  &lt;&lt;",
+                                    "",
                                     "2",
                                     "01:43:00,516 --> 01:43:01,546",
                                     "great conference, and I'll see",
@@ -96,6 +98,7 @@ public func testWWDCWebVTTToSRTHelperKit() {
                 let expectResult = ["1",
                                     "01:42:58,766 --> 01:43:00,516",
                                     ">>  And with that, I hope you have a  <<",
+                                    "",
                                     "2",
                                     "01:43:00,516 --> 01:43:01,546",
                                     "great conference, and I'll see",
@@ -109,6 +112,7 @@ public func testWWDCWebVTTToSRTHelperKit() {
                 let expectResult = ["1",
                                     "01:42:58,766 --> 01:43:00,516",
                                     ">>  And with that, I hope you have a  <<",
+                                    "",
                                     "2",
                                     "01:43:00,516 --> 01:43:01,546",
                                     "great conference, and I'll see",
@@ -127,7 +131,7 @@ public func testWWDCWebVTTToSRTHelperKit() {
                 
                 guard let string = parser.parseToSRT(strArr) else { return }
                 let result = string.components(separatedBy: "\n").count
-                let expectResult = 247
+                let expectResult = 328
                 
                 try expect(expectResult) == result
             }
