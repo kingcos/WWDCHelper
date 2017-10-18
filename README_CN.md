@@ -65,7 +65,7 @@ Usage: WWDCHelper [options]
 > wwdchelper -y fall2017
 ```
 
-- *Update*: 如果您需要下载 Fall 2017 所有英文字幕（目前官网暂未放出中文字幕）：
+- *Update*: 如果您需要下载 Fall 2017 所有英文字幕（**官网最新简体中文字幕已更新至 Releases 页面**）：
 
 ```sh
 # HD 视频：
