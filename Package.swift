@@ -1,19 +1,30 @@
-// swift-tools-version:3.1
+// swift-tools-version:4.0
 
 import PackageDescription
 
 let package = Package(
     name: "WWDCHelper",
-    targets: [
-        Target(name: "WWDCWebVTTToSRTHelperKit", dependencies: []),
-        Target(name: "WWDCHelperKit", dependencies: ["WWDCWebVTTToSRTHelperKit"]),
-        Target(name: "WWDCHelper", dependencies: ["WWDCHelperKit"])
-    ],
     dependencies: [
-        .Package(url: "https://github.com/jatoben/CommandLine", "3.0.0-pre1"),
-        .Package(url: "https://github.com/onevcat/Rainbow", majorVersion: 2),
-        .Package(url: "https://github.com/kylef/PathKit", majorVersion: 0, minor: 8),
-        .Package(url: "https://github.com/kylef/Spectre.git", majorVersion: 0, minor: 7)
+        .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.1"),
+        .package(url: "https://github.com/onevcat/Rainbow.git", from: "3.1.1"),
+        .package(url: "https://github.com/kylef/Spectre.git", from: "0.8.0"),
+        .package(url: "https://github.com/kingcos/CommandLine.git", from: "4.1.0")
     ],
-    exclude: [ "Tests/Fixtures" ]
+    targets: [
+        .target(
+            name: "WWDCHelper",
+            dependencies: ["WWDCHelperKit", "CommandLine", "Rainbow"]),
+        .target(
+            name: "WWDCHelperKit",
+            dependencies: ["WWDCWebVTTToSRTHelperKit", "PathKit", "Rainbow"]),
+        .target(
+            name: "WWDCWebVTTToSRTHelperKit",
+            dependencies: []),
+        .testTarget(
+            name: "WWDCHelperKitTests",
+            dependencies: ["WWDCHelperKit", "PathKit", "Spectre"]),
+        .testTarget(
+            name: "WWDCWebVTTToSRTHelperKitTests",
+            dependencies: ["WWDCWebVTTToSRTHelperKit", "PathKit", "Spectre"]),
+        ]
 )

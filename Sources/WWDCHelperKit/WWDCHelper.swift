@@ -99,7 +99,7 @@ extension WWDCHelper {
         default:
             parser = WWDC2017Parser()
         }
-        let sessions = try getSessions(by: sessionIDs, with: parser).sorted { $0.0.id < $0.1.id }
+        let sessions = try getSessions(by: sessionIDs, with: parser).sorted { $0.id < $1.id }
         
         if subtitleLanguage != .empty {
             if !subtitlePath.exists {

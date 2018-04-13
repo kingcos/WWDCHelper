@@ -5,7 +5,7 @@
 <p align="center">
 <a href="https://travis-ci.org/kingcos/WWDCHelper"><img src="https://www.travis-ci.org/kingcos/WWDCHelper.svg?branch=master"></a>
 <a href="https://codecov.io/gh/kingcos/WWDCHelper"><img src="https://codecov.io/gh/kingcos/WWDCHelper/branch/master/graph/badge.svg"></a>
-<img src="https://img.shields.io/badge/Swift-3.1-orange.svg">
+<img src="https://img.shields.io/badge/Swift-4.1-orange.svg">
 <img src="https://img.shields.io/badge/Platform-macOS-red.svg">
 <img src="https://img.shields.io/badge/License-MIT-blue.svg">
 </p>
