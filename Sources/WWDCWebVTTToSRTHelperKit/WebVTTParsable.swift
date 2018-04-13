@@ -79,12 +79,12 @@ extension RegexWebVTTParsable {
             
             if !timelineMatches.isEmpty {
                 for match in timelineMatches {
-                    let firstRange = match.rangeAt(1)
+                    let firstRange = match.range(at: 1)
                     result.append(nsStr.substring(with: firstRange).replacingOccurrences(of: ".", with: ","))
                 }
             } else if !subtitleMatches.isEmpty {
                 for match in subtitleMatches {
-                    let firstRange = match.rangeAt(1)
+                    let firstRange = match.range(at: 1)
                     result.append(nsStr.substring(with: firstRange))
                 }
             } else {

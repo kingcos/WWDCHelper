@@ -33,7 +33,7 @@ extension RegexSessionInfoParsable {
         
         var result = ""
         for match in matches {
-            let firstRange = match.rangeAt(1)
+            let firstRange = match.range(at: 1)
             result = nsStr.substring(with: firstRange)
         }
         
@@ -48,9 +48,9 @@ extension RegexSessionInfoParsable {
         
         var result = [String]()
         for match in matches {
-            let firstRange = match.rangeAt(1)
-            let secondRange = match.rangeAt(2)
-            let thirdRange = match.rangeAt(3)
+            let firstRange = match.range(at: 1)
+            let secondRange = match.range(at: 2)
+            let thirdRange = match.range(at: 3)
             
             result.append(nsStr.substring(with: firstRange))
             result.append(nsStr.substring(with: secondRange))
@@ -68,8 +68,8 @@ extension RegexSessionInfoParsable {
         
         var result = [String : String]()
         for match in matches {
-            let firstRange = match.rangeAt(1)
-            let secondRange = match.rangeAt(2)
+            let firstRange = match.range(at: 1)
+            let secondRange = match.range(at: 2)
             result[nsStr.substring(with: firstRange)] = nsStr.substring(with: secondRange)
         }
         
@@ -100,8 +100,8 @@ public class Fall2017Parser: RegexSessionInfoParsable {
         
         var result = [String]()
         for match in matches {
-            let firstRange = match.rangeAt(1)
-            let secondRange = match.rangeAt(2)
+            let firstRange = match.range(at: 1)
+            let secondRange = match.range(at: 2)
             
             result.append(nsStr.substring(with: firstRange))
             result.append(nsStr.substring(with: secondRange))
