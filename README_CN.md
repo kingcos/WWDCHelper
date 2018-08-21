@@ -117,16 +117,6 @@ or
 - [onevcat](https://github.com/onevcat)
 - [onevcat/FengNiao](https://github.com/onevcat/FengNiao)
 
-## WWDC 17 - 笔记
-
-- [102 - Platforms State of the Union](/2017/102)
-
-### 设计
-
-- [819 - Designing for a Global Audience](/2017/819)
-- [822 - App Icon Design](/2017/822)
-- [823 - Designing Glyphs](/2017/823)
-
 ## 许可
 
 MIT
