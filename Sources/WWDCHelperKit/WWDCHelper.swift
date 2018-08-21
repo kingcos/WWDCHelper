@@ -13,8 +13,10 @@ import WWDCWebVTTToSRTHelperKit
 
 public enum WWDCYear: String {
     case wwdc2018 = "wwdc2018"
-    case fall2017 = "fall2017"
     case wwdc2017 = "wwdc2017"
+    case wwdc2016 = "wwdc2016"
+    case wwdc2015 = "wwdc2015"
+    case wwdc2014 = "wwdc2014"
     case unknown
     
     init(_ value: String?) {
@@ -24,12 +26,16 @@ public enum WWDCYear: String {
         }
         
         switch value.lowercased() {
-        case "wwdc2018":
+        case "wwdc2018", "2018":
             self = .wwdc2018
-        case "fall2017":
-            self = .fall2017
-        case "wwdc2017":
+        case "wwdc2017", "2017":
             self = .wwdc2017
+        case "wwdc2016", "2016":
+            self = .wwdc2016
+        case "wwdc2015", "2015":
+            self = .wwdc2015
+        case "wwdc2014", "2014":
+            self = .wwdc2014
         default:
             self = .unknown
         }
@@ -95,22 +101,14 @@ extension WWDCHelper {
         guard year != .unknown else { throw HelperError.unknownYear }
         guard subtitleLanguage != .unknown else { throw HelperError.unknownSubtitleLanguage }
         
-        var parser: RegexSessionInfoParsable
-        switch year {
-        case .wwdc2018:
-            parser = WWDC2018Parser()
-        case .fall2017:
-            parser = Fall2017Parser()
-        default:
-            parser = WWDC2017Parser()
-        }
-        let sessions = try getSessions(by: sessionIDs, with: parser).sorted { $0.id < $1.id }
+        let sessions = try getSessions(by: sessionIDs,
+                                       with: WWDCParser.shared).sorted { $0.id < $1.id }
         
         if subtitleLanguage != .empty {
             if !subtitlePath.exists {
                 throw HelperError.subtitlePathNotExist
             } else {
-                try downloadData(sessions, with: parser)
+                try downloadData(sessions, with: WWDCParser.shared)
             }
         } else {
             _ = sessions.map { $0.output(year) }
