@@ -21,11 +21,11 @@
       },
       {
         "package": "Rainbow",
-        "repositoryURL": "https://github.com/onevcat/Rainbow",
+        "repositoryURL": "https://github.com/onevcat/Rainbow.git",
         "state": {
           "branch": null,
-          "revision": "f69961599ad524251d677fbec9e4bac57385d6fc",
-          "version": "3.1.1"
+          "revision": "797a68d0a642609424b08f11eb56974a54d5f6e2",
+          "version": "3.1.4"
         }
       },
       {
