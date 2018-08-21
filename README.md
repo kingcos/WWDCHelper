@@ -108,6 +108,8 @@ or
 - [ ] Support subtitles in Traditional Chinese
 - [ ] Support subtitles in both English & Chinese
 - [ ] Support WWDC before 2017
+- [ ] Support WWDC 2018
+- [ ] Swift 4.2
 - [ ] Support for Linux 🐧
 
 ### Reference
