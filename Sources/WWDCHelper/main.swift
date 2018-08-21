@@ -95,7 +95,7 @@ do {
     
     switch err {
     case .unknownYear:
-        print("WWDC \(year!) isn't been supported currently. Only support WWDC 2017 & Fall 2017 now.".red.bold)
+        print("\(year!) hasn't been supported currently. Only support WWDC 2014 ~ WWDC 2018 now.".red.bold)
     case .unknownSubtitleLanguage:
         print("Language \(subtitleLanguage!) Only support Simpliefied Chinese or English now.".red.bold)
     case .unknownSessionID:
