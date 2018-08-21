@@ -12,6 +12,7 @@ import Rainbow
 import WWDCWebVTTToSRTHelperKit
 
 public enum WWDCYear: String {
+    case wwdc2018 = "wwdc2018"
     case fall2017 = "fall2017"
     case wwdc2017 = "wwdc2017"
     case unknown
@@ -23,6 +24,8 @@ public enum WWDCYear: String {
         }
         
         switch value.lowercased() {
+        case "wwdc2018":
+            self = .wwdc2018
         case "fall2017":
             self = .fall2017
         case "wwdc2017":
@@ -94,6 +97,8 @@ extension WWDCHelper {
         
         var parser: RegexSessionInfoParsable
         switch year {
+        case .wwdc2018:
+            parser = WWDC2018Parser()
         case .fall2017:
             parser = Fall2017Parser()
         default:
