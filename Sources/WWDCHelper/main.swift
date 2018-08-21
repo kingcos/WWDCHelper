@@ -84,7 +84,7 @@ var helper = WWDCHelper(year: year,
 
 do {
     print("Welcome to WWDCHelper by github.com/kingcos! 👏")
-    print("Please wait a little while. Helper is trying to fetch your favorite data hard...")
+    print("Please wait a little while.\nHelper is trying to fetch your favorite WWDC info hard...")
     try helper.enterHelper()
 } catch {
     print("If you have any issues, please contact with me at github.com/kingcos.")
@@ -95,7 +95,7 @@ do {
     
     switch err {
     case .unknownYear:
-        print("WWDC \(year!) isn't been supported currently. Only support 2016 & 2017 now.".red.bold)
+        print("WWDC \(year!) isn't been supported currently. Only support WWDC 2017 & Fall 2017 now.".red.bold)
     case .unknownSubtitleLanguage:
         print("Language \(subtitleLanguage!) Only support Simpliefied Chinese or English now.".red.bold)
     case .unknownSessionID:
