@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+echo "Swift 4.1 CodeCov Integration";
+
+# Determine OS
+UNAME=`uname`;
+if [[ $UNAME == "Darwin" ]];
+then
+    OS="macos";
+else
+    echo "🚫  Unsupported OS: $UNAME, skipping...";
+    exit 0;
+fi
+echo "🖥  Operating System: $OS";
+
+
+PROJ_OUTPUT=`swift package generate-xcodeproj`;
+PROJ_NAME="${PROJ_OUTPUT/generated: .\//}"
+SCHEME_NAME="${PROJ_NAME/.xcodeproj/}"
+
+echo "🚀  Testing: $SCHEME_NAME";
+
+rvm install 2.3.7
+gem install xcpretty
+WORKING_DIRECTORY=$(PWD) xcodebuild -project $PROJ_NAME -scheme $SCHEME_NAME -sdk macosx10.13 -destination arch=x86_64 -configuration Debug -enableCodeCoverage YES test | xcpretty
+bash <(curl -s https://codecov.io/bash)
+
+echo "✅  Done";
