@@ -11,7 +11,7 @@ import CommandLineKit
 import Rainbow
 import WWDCHelperKit
 
-let appVersion = "v0.3.0"
+let appVersion = "v1.0.0"
 let cli = CommandLineKit.CommandLine()
 
 cli.formatOutput = { s, type in
@@ -33,13 +33,13 @@ cli.formatOutput = { s, type in
 let yearOption = StringOption(shortFlag: "y", longFlag: "year",
                               helpMessage: "Setup the year of WWDC. Support ALL WWDCs from `2014` to `2018` now! Default is WWDC 2018.")
 let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "sessions",
-                                         helpMessage: "Setup session numbers in WWDC. Default is all.")
+                                         helpMessage: "Setup the session numbers in WWDC. Default is all sessions.")
 let subtitleLanguageOption = StringOption(shortFlag: "l", longFlag: "language",
-                                          helpMessage: "Setup language of subtitle. Only support `chs` or `eng` now. Default is Simplified Chinese.")
+                                          helpMessage: "Setup the language of subtitle. Support `chs`, `eng`, and `jpn` (only WWDC 2018) now! Default is Simplified Chinese.")
 let isSubtitleForSDVideoOption = BoolOption(longFlag: "sd",
-                                            helpMessage: "Add sd tag for subtitle filename. Default is for hd.")
+                                            helpMessage: "Add sd tag for subtitle\'s filename. Default is for hd videos.")
 let subtitlePathOption = StringOption(shortFlag: "p", longFlag: "path",
-                                      helpMessage: "Setup download path of subtitles. Default is current folder.")
+                                      helpMessage: "Setup the download path of subtitles. Default is current folder.")
 let helpOption = BoolOption(shortFlag: "h", longFlag: "help",
                             helpMessage: "Print the help info.")
 let versionOption = BoolOption(shortFlag: "v", longFlag: "version",
@@ -95,13 +95,13 @@ do {
     
     switch err {
     case .unknownYear:
-        print("\(year!) hasn't been supported currently. Only support WWDC 2014 ~ WWDC 2018 now.".red.bold)
+        print("\(year!) hasn't been supported currently. Now support WWDC 2014 ~ WWDC 2018.".red.bold)
     case .unknownSubtitleLanguage:
-        print("Language \(subtitleLanguage!) Only support Simpliefied Chinese or English now.".red.bold)
+        print("Language \(subtitleLanguage!) is NOT supported for now, WWDC support Simpliefied Chinese, Japanese (for WWDC 2018) and English.".red.bold)
     case .unknownSessionID:
-        print("Session ID was not found".red.bold)
+        print("Session ID was not found, please check it.".red.bold)
     case .subtitlePathNotExist:
-        print("Subtitle path does not exist.")
+        print("The path does NOT exist, please check it.")
     }
     
     exit(EX_USAGE)
