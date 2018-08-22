@@ -16,9 +16,9 @@
 
 ## 简介
 
-WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资源。现在，你可以用它直接获取 SD/HD 视频和对应 PDF 文档的链接，也可以直接下载英文或**简体中文**的字幕。
+WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资源。现在，你可以用它直接获取 SD/HD 视频和对应 PDF 文档的链接，也可以直接下载英文、日文（仅限 WWDC 2018）、甚至**简体中文**的字幕。
 
-当然，你也可以直接在 [releases](https://github.com/kingcos/WWDCHelper/releases) 页面仅下载 WWDC 2017 或 Fall 2017 的所有字幕。
+当然，你也可以直接在 [releases](https://github.com/kingcos/WWDCHelper/releases) 页面仅下载 WWDC 2014 ～ 2018 的所有字幕。
 
 > **提示**
 > 
@@ -42,15 +42,15 @@ WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资�
 > wwdchelper -h
 Usage: WWDCHelper [options]
   -y, --year:
-      Setup the year of WWDC. Support `WWDC2017` & `Fall2017` now. Default is WWDC 2017.
+      Setup the year of WWDC. Support ALL WWDCs from `2014` to `2018` now! Default is 2018.
   -s, --sessions:
-      Setup session numbers in WWDC. Default is all.
+      Setup the session numbers in WWDC. Default is all sessions.
   -l, --language:
-      Setup language of subtitle. Only support `chs` or `eng` now. Default is Simplified Chinese.
+      Setup the language of subtitle. Support `chs`, `eng`, and `jpn` (only WWDC 2018) now! Default is Simplified Chinese.
   --sd:
-      Add sd tag for subtitle filename. Default is for hd.
+      Add sd tag for subtitle\'s filename. Default is for hd videos.
   -p, --path:
-      Setup download path of subtitles. Default is current folder.
+      Setup the download path of subtitles. Default is current folder.
   -h, --help:
       Print the help info.
   -v, --version:
@@ -59,30 +59,30 @@ Usage: WWDCHelper [options]
 
 ### Demo
 
-- *Update*: 如果您需要获取 Fall 2017 所有 Session 信息（包括视频的下载链接）：
+- *Update*: 如果您需要获取 WWDC 2018 所有 Session 信息（包括视频的下载链接）：
 
 ```sh
-> wwdchelper -y fall2017
+> wwdchelper -y 2018
 ```
 
-- *Update*: 如果您需要下载 Fall 2017 所有英文字幕（**官网最新简体中文字幕已更新至 Releases 页面**）：
+- *Update*: 如果您需要下载 WWDC 2018 所有英文字幕（**官网最新简体中文字幕已更新至 Releases 页面**）：
 
 ```sh
 # HD 视频：
-> wwdchelper -y fall2017 -l eng
+> wwdchelper -y 2018 -l eng
 or
 # SD 视频：
-> wwdchelper -y fall2017 --sd -l eng
+> wwdchelper -y 2018 --sd -l eng
 ```
 
-- 如果您仅需要 WWDC 2017 中 Session 102 和 202 的信息：
+- 如果您仅需要 WWDC 2018 中 Session 102 和 202 的信息：
 
 ```sh
 > wwdchelper -s 102 202
 or
-> wwdchelper -y 17 -s 102 202
+> wwdchelper -y 2018 -s 102 202
 or
-> wwdchelper --year 2017 --sesions 102 202
+> wwdchelper --year 2018 --sesions 102 202
 ```
 
 - 如果您想要为 Session 102 和 202 的 SD（清晰度）视频下载简体中文字幕：
@@ -90,7 +90,7 @@ or
 ```sh
 > wwdchelper -s 102 202 -l chs --sd
 or
-> wwdchelper --year 2017 --sessions 102 202 --language chs --sd
+> wwdchelper --year 2018 --sessions 102 202 --language chs --sd
 ```
 
 - 如果您想要为**所有** Session 的 HD（清晰度）视频下载简体中文字幕，并指定路径（**不推荐**）：
@@ -103,11 +103,11 @@ or
 
 > 可能会在未来实现以下特点：
 
-- [x] 率先支持 Fall 2017
 - [x] 一次性下载多个字幕
-- [ ] 支持繁体中文字幕
-- [ ] 支持中英字幕（同时）
-- [ ] 支持早于 WWDC 2017
+- [x] 支持所有官网提供字幕
+- [x] 支持所有年份 WWDC
+- [x] Swift 4.1 支持
+- [ ] Swift 4.2 支持
 - [ ] 支持 Linux 🐧
 
 ### 参考
@@ -116,16 +116,6 @@ or
 - [ohoachuck/wwdc-downloader](https://github.com/ohoachuck/wwdc-downloader)
 - [onevcat](https://github.com/onevcat)
 - [onevcat/FengNiao](https://github.com/onevcat/FengNiao)
-
-## WWDC 17 - 笔记
-
-- [102 - Platforms State of the Union](/2017/102)
-
-### 设计
-
-- [819 - Designing for a Global Audience](/2017/819)
-- [822 - App Icon Design](/2017/822)
-- [823 - Designing Glyphs](/2017/823)
 
 ## 许可
 

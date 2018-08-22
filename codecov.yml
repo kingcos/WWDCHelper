@@ -4,4 +4,4 @@ coverage:
   ignore:
   - Tests
   - resources
-  - 2017
+  - CI
