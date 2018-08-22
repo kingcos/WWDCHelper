@@ -3,7 +3,7 @@ os:
 language: generic
 sudo: required
 dist: trusty
-osx_image: xcode9.3
+osx_image: xcode9.4.1
 script:
-  - eval "$(curl -sL https://raw.githubusercontent.com/kingcos/Swift-CI/master/ci)"
-  - eval "$(curl -sL https://raw.githubusercontent.com/kingcos/Swift-CI/master/codecov)"
+  - eval "$(curl -sL https://raw.githubusercontent.com/kingcos/WWDCHelper/dev/CI/ci)"
+  - eval "$(curl -sL https://raw.githubusercontent.com/kingcos/WWDCHelper/dev/CI/codecov)"
