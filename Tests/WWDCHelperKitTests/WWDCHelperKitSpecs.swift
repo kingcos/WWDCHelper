@@ -20,7 +20,7 @@ public func testWWDCHelperKit() {
         
         $0.describe("--- WWDC 2017 Parser ---") {
             
-            let parser = WWDCParser()
+            let parser = WWDCParser.shared
             
             $0.it("should parse subtitle index URL prefix") {
                 let content = "https://devstreaming-cdn.apple.com/videos/wwdc/2017/102xyar2647hak3e/102/102_hd_platforms_state_of_the_union.mp4?dl=1"
