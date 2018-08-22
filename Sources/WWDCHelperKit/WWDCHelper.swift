@@ -45,6 +45,7 @@ public enum WWDCYear: String {
 public enum SubtitleLanguage: String {
     case eng = "eng"
     case chs = "zho"
+    case jpn = "jpn"
     case empty
     case unknown
     
@@ -59,6 +60,8 @@ public enum SubtitleLanguage: String {
             self = .eng
         case "chs":
             self = .chs
+        case "jpn":
+            self = .jpn
         default:
             self = .unknown
         }
