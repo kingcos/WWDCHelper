@@ -16,7 +16,7 @@
 
 ## Info
 
-WWDCHelper is a command line tool on macOS for you to get WWDC info easily. Now you can get download links of SD/HD video & PDF, and download subtitles in English or **Simplified Chinese** directly by it.
+WWDCHelper is a command line tool on macOS for you to get WWDC info easily. Now you can get download links of SD/HD video & PDF, and download subtitles in English, Janpanese (only WWDC 2018), and even Simplified Chinese directly by it.
 
 You can also download subtitles at the [releases](https://github.com/kingcos/WWDCHelper/releases) page.
 
@@ -42,15 +42,15 @@ You should have [Swift Package Manager](https://swift.org/package-manager/) inst
 > wwdchelper -h
 Usage: WWDCHelper [options]
   -y, --year:
-      Setup the year of WWDC. Support `WWDC2017` & `Fall2017` now. Default is WWDC 2017.
+      Setup the year of WWDC. Support ALL WWDCs from `2014` to `2018` now! Default is 2018.
   -s, --sessions:
-      Setup session numbers in WWDC. Default is all.
+      Setup the session numbers in WWDC. Default is all sessions.
   -l, --language:
-      Setup language of subtitle. Only support `chs` or `eng` now. Default is Simplified Chinese.
+      Setup the language of subtitle. Support `chs`, `eng`, and `jpn` (only WWDC 2018) now! Default is Simplified Chinese.
   --sd:
-      Add sd tag for subtitle filename. Default is for hd.
+      Add sd tag for subtitle\'s filename. Default is for hd videos.
   -p, --path:
-      Setup download path of subtitles. Default is current folder.
+      Setup the download path of subtitles. Default is current folder.
   -h, --help:
       Print the help info.
   -v, --version:
@@ -59,30 +59,30 @@ Usage: WWDCHelper [options]
 
 ### Demo
 
-- *Update*: If you want to get all sessions info of Fall 2017 (Including videos' download links):：
+- *Update*: If you want to get all sessions info of WWDC 2018 (Including videos' download links):
 
 ```sh
-> wwdchelper -y fall2017
+> wwdchelper -y 2018
 ```
 
-- *Update*: - If you want to download subtitles in English of Fall 2017：
+- *Update*: - If you want to download subtitles in English of WWDC 2018:
 
 ```sh
 # HD Videos：
-> wwdchelper -y fall2017 -l eng
+> wwdchelper -y 2018 -l eng
 or
 # SD Videos：
-> wwdchelper -y fall2017 --sd -l eng
+> wwdchelper -y 2018 --sd -l eng
 ```
 
-- If you just want to get Session 102 & 202 info of WWDC 2017:
+- If you just want to get Session 102 & 202 info of WWDC 2018:
 
 ```sh
 > wwdchelper -s 102 202
 or
-> wwdchelper -y 17 -s 102 202
+> wwdchelper -y 2018 -s 102 202
 or
-> wwdchelper --year 2017 --sesions 102 202
+> wwdchelper --year 2018 --sesions 102 202
 ```
 
 - If you want to download subtitles in English of Session 102 & 202 for SD videos:
@@ -90,7 +90,7 @@ or
 ```sh
 > wwdchelper -s 102 202 -l eng --sd
 or
-> wwdchelper --year 2017 --sessions 102 202 --language eng --sd
+> wwdchelper --year 2018 --sessions 102 202 --language eng --sd
 ```
 
 - If you want to download **all** subtitles in English for HD videos, and specify the path (**NOT recommend**):
@@ -103,12 +103,10 @@ or
 
 > Maybe implement these features in the future.
 
-- [x] Support Fall 2017
 - [x] Download multiple subtitles at once
-- [ ] Support subtitles in Traditional Chinese
-- [ ] Support subtitles in both English & Chinese
-- [ ] Support WWDC before 2017
-- [ ] Support WWDC 2018
+- [x] Support subtitles in all languages that provided
+- [x] Support ALL WWDC
+- [x] Swift 4.1
 - [ ] Swift 4.2
 - [ ] Support for Linux 🐧
 
