@@ -21,7 +21,7 @@ public enum WWDCYear: String {
     
     init(_ value: String?) {
         guard let value = value else {
-            self = .wwdc2017
+            self = .wwdc2018
             return
         }
         
@@ -132,7 +132,7 @@ extension WWDCHelper {
             filename += session.title.lowercased()
                 .replacingOccurrences(of: " ", with: "_")
                 .replacingOccurrences(of: "/", with: "")
-            filename = filename + "." + (subtitleLanguage == .chs ? "chs" : "eng") + ".srt"
+            filename = filename + "." + subtitleLanguage.rawValue + ".srt"
             
             let path = subtitlePath + filename
             
