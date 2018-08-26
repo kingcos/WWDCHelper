@@ -19,7 +19,6 @@ public func testWWDCHelperKit() {
         let fixturesFolderPath = Path(#file).parent().parent() + "Fixtures"
         
         $0.describe("--- WWDC 2017 Parser ---") {
-            
             let parser = WWDCParser.shared
             
             $0.it("should parse subtitle index URL prefix") {
@@ -65,7 +64,7 @@ public func testWWDCHelperKit() {
         }
         
         $0.describe("--- WWDC Helper ---") {
-            var helper = WWDCHelper()
+            var helper = WWDCHelper(year: "2017")
             var resourceURLs = [String]()
             
             $0.it("should get sessions info") {
@@ -154,10 +153,10 @@ public func testWWDCHelperKit() {
                 var helper = WWDCHelper()
                 try! helper.enterHelper()
  
-                helper = WWDCHelper(year: 2017)
+                helper = WWDCHelper(year: "2017")
                 try! helper.enterHelper()
  
-                helper = WWDCHelper(year: 2017, sessionIDs: ["102", "802"])
+                helper = WWDCHelper(year: "2017", sessionIDs: ["102", "802"])
                 try! helper.enterHelper()
                 */
                 helper = WWDCHelper(year: "2017", sessionIDs: ["202"])
