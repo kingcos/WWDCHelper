@@ -17,6 +17,8 @@ public enum WWDCYear: String {
     case wwdc2016 = "wwdc2016"
     case wwdc2015 = "wwdc2015"
     case wwdc2014 = "wwdc2014"
+    case wwdc2013 = "wwdc2013"
+    case wwdc2012 = "wwdc2012"
     case unknown
     
     init(_ value: String?) {
@@ -36,6 +38,10 @@ public enum WWDCYear: String {
             self = .wwdc2015
         case "wwdc2014", "2014":
             self = .wwdc2014
+        case "wwdc2013", "2013":
+            self = .wwdc2013
+        case "wwdc2012", "2012":
+            self = .wwdc2012
         default:
             self = .unknown
         }

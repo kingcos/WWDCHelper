@@ -31,7 +31,7 @@ cli.formatOutput = { s, type in
 }
 
 let yearOption = StringOption(shortFlag: "y", longFlag: "year",
-                              helpMessage: "Setup the year of WWDC. Support ALL WWDCs from `2014` to `2018` now! Default is WWDC 2018.")
+                              helpMessage: "Setup the year of WWDC. Support ALL WWDCs from `2012` to `2018` now! Default is WWDC 2018.")
 let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "sessions",
                                          helpMessage: "Setup the session numbers in WWDC. Default is all sessions.")
 let subtitleLanguageOption = StringOption(shortFlag: "l", longFlag: "language",
@@ -95,7 +95,7 @@ do {
     
     switch err {
     case .unknownYear:
-        print("\(year!) hasn't been supported currently. Now support WWDC 2014 ~ WWDC 2018.".red.bold)
+        print("\(year!) hasn't been supported currently. Now support WWDC 2012 ~ WWDC 2018 same as developer official website.".red.bold)
     case .unknownSubtitleLanguage:
         print("Language \(subtitleLanguage!) is NOT supported for now, WWDC support Simpliefied Chinese, Japanese (for WWDC 2018) and English.".red.bold)
     case .unknownSessionID:

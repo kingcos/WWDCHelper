@@ -49,8 +49,8 @@ extension RegexSessionInfoParsable {
         var result = [String]()
         for match in matches {
             let firstRange = match.range(at: 1)
-            let secondRange = match.range(at: 2)
-            let thirdRange = match.range(at: 3)
+            let secondRange = match.range(at: 3)
+            let thirdRange = match.range(at: 5)
             
             result.append(nsStr.substring(with: firstRange))
             result.append(nsStr.substring(with: secondRange))
