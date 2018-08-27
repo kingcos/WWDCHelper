@@ -42,7 +42,7 @@ You should have [Swift Package Manager](https://swift.org/package-manager/) inst
 > wwdchelper -h
 Usage: WWDCHelper [options]
   -y, --year:
-      Setup the year of WWDC. Support ALL WWDCs from `2014` to `2018` now! Default is 2018.
+      Setup the year of WWDC. Support ALL WWDCs from `2012` to `2018` now! Default is 2018.
   -s, --sessions:
       Setup the session numbers in WWDC. Default is all sessions.
   -l, --language:
@@ -105,7 +105,7 @@ or
 
 - [x] Download multiple subtitles at once
 - [x] Support subtitles in all languages that provided
-- [x] Support ALL WWDC
+- [x] Support ALL WWDC (2012 ~ 2018)
 - [x] Swift 4.1
 - [ ] Swift 4.2
 - [ ] Support for Linux 🐧

@@ -18,7 +18,7 @@
 
 WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资源。现在，你可以用它直接获取 SD/HD 视频和对应 PDF 文档的链接，也可以直接下载英文、日文（仅限 WWDC 2018）、甚至**简体中文**的字幕。
 
-当然，你也可以直接在 [releases](https://github.com/kingcos/WWDCHelper/releases) 页面仅下载 WWDC 2014 ～ 2018 的所有字幕。
+当然，你也可以直接在 [releases](https://github.com/kingcos/WWDCHelper/releases) 页面仅下载字幕。
 
 > **提示**
 > 
@@ -42,7 +42,7 @@ WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资�
 > wwdchelper -h
 Usage: WWDCHelper [options]
   -y, --year:
-      Setup the year of WWDC. Support ALL WWDCs from `2014` to `2018` now! Default is 2018.
+      Setup the year of WWDC. Support ALL WWDCs from `2012` to `2018` now! Default is 2018.
   -s, --sessions:
       Setup the session numbers in WWDC. Default is all sessions.
   -l, --language:
@@ -105,7 +105,7 @@ or
 
 - [x] 一次性下载多个字幕
 - [x] 支持所有官网提供字幕
-- [x] 支持所有年份 WWDC
+- [x] 支持所有年份 WWDC（2012～2018）
 - [x] Swift 4.1 支持
 - [ ] Swift 4.2 支持
 - [ ] 支持 Linux 🐧
