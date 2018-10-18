@@ -5,7 +5,7 @@
 <p align="center">
 <a href="https://travis-ci.org/kingcos/WWDCHelper"><img src="https://www.travis-ci.org/kingcos/WWDCHelper.svg?branch=master"></a>
 <a href="https://codecov.io/gh/kingcos/WWDCHelper"><img src="https://codecov.io/gh/kingcos/WWDCHelper/branch/master/graph/badge.svg"></a>
-<img src="https://img.shields.io/badge/Swift-4.1-orange.svg">
+<img src="https://img.shields.io/badge/Swift-4.2-orange.svg">
 <img src="https://img.shields.io/badge/Platform-macOS-red.svg">
 <img src="https://img.shields.io/badge/License-MIT-blue.svg">
 </p>
@@ -42,7 +42,7 @@ You should have [Swift Package Manager](https://swift.org/package-manager/) inst
 > wwdchelper -h
 Usage: WWDCHelper [options]
   -y, --year:
-      Setup the year of WWDC. Support ALL WWDCs from `2014` to `2018` now! Default is 2018.
+      Setup the year of WWDC. Support ALL WWDCs from `2012` to `2018` now! Default is 2018.
   -s, --sessions:
       Setup the session numbers in WWDC. Default is all sessions.
   -l, --language:
@@ -105,7 +105,7 @@ or
 
 - [x] Download multiple subtitles at once
 - [x] Support subtitles in all languages that provided
-- [x] Support ALL WWDC
+- [x] Support ALL WWDC (2012 ~ 2018)
 - [x] Swift 4.1
 - [ ] Swift 4.2
 - [ ] Support for Linux 🐧

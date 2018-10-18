@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-echo "Swift 4.1 CodeCov Integration";
+VERSION="4.2"
+echo "Swift $VERSION CodeCov Integration";
 
 # Determine OS
 UNAME=`uname`;
@@ -22,7 +23,7 @@ echo "🚀  Testing: $SCHEME_NAME";
 
 rvm install 2.3.7
 gem install xcpretty
-WORKING_DIRECTORY=$(PWD) xcodebuild -project $PROJ_NAME -scheme $SCHEME_NAME -sdk macosx10.13 -destination arch=x86_64 -configuration Debug -enableCodeCoverage YES test | xcpretty
+WORKING_DIRECTORY=$(PWD) xcodebuild -project $PROJ_NAME -scheme $SCHEME_NAME -sdk macosx10.14 -destination arch=x86_64 -configuration Debug -enableCodeCoverage YES test | xcpretty
 bash <(curl -s https://codecov.io/bash)
 
 echo "✅  Done";
