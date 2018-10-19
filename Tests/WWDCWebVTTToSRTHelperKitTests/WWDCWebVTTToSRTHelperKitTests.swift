@@ -15,7 +15,6 @@ import PathKit
 
 class WWDCWebVTTToSRTHelperKitTests: XCTestCase {
     func testRunSpecture() {
-//        testWWDCWebVTTToSRTHelperKit()
         describe("----- WWDCWebVTTToSRTHelperKit Tests -----") {
             
             let fixturesFolderPath = Path(#file).parent().parent() + "Fixtures"
