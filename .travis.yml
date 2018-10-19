@@ -5,5 +5,5 @@ sudo: required
 dist: trusty
 osx_image: xcode10
 script:
-  - eval "$(curl -sL https://raw.githubusercontent.com/kingcos/WWDCHelper/dev/CI/ci)"
-  - eval "$(curl -sL https://raw.githubusercontent.com/kingcos/WWDCHelper/dev/CI/codecov)"
+  - eval "$(curl -sL https://raw.githubusercontent.com/kingcos/WWDCHelper/master/CI/ci)"
+  - eval "$(curl -sL https://raw.githubusercontent.com/kingcos/WWDCHelper/master/CI/codecov)"
