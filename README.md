@@ -107,7 +107,7 @@ or
 - [x] Support subtitles in all languages that provided
 - [x] Support ALL WWDC (2012 ~ 2018)
 - [x] Swift 4.1
-- [ ] Swift 4.2
+- [x] Swift 4.2
 - [ ] Support for Linux 🐧
 
 ### Reference
@@ -119,4 +119,4 @@ or
 
 ## LICENSE
 
-MIT
+- MIT
