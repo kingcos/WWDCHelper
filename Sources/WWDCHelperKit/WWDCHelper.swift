@@ -150,9 +150,16 @@ extension WWDCHelper {
             guard let urls = getWebVTTURLs(with: getResourceURLs(by: session.id, with: parser), and: parser)
                 else { continue }
             
-            let strArr = urls
-                .map { Network.shared.fetchContent(of: $0).components(separatedBy: "\n") }
-                .flatMap { $0.map { $0 } }
+            let content = urls
+                .map { url -> [String] in
+                    let content = Network.shared.fetchContent(of: url)
+                    if content.contains("WEBVTT") {
+                        return content.components(separatedBy: "\n")
+                    } else {
+                        return []
+                    }
+                }
+            let strArr = content.flatMap { $0.map { $0 } }
             
             guard let result = srtHelper.parse(strArr),
                 let data = result.data(using: .utf8) else { return }
@@ -222,11 +229,14 @@ extension WWDCHelper {
         guard let urlPrefix = getSubtitleIndexURLPrefix(with: resources, and: parser),
             let url = getSubtitleIndexURL(with: resources, and: parser) else { return nil }
         let content = Network.shared.fetchContent(of: url)
-        let filesCount = content
+        var filesCount = content
             .components(separatedBy: "\n")
             .filter { $0.hasPrefix("fileSequence") }
             .count
         
+        if filesCount == 0 {
+            filesCount = 100
+        }
         var result = [String]()
         for i in 0 ..< filesCount {
             result.append(urlPrefix + "/subtitles/\(subtitleLanguage.rawValue)/fileSequence\(i).webvtt")
