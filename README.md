@@ -10,7 +10,9 @@
 <img src="https://img.shields.io/badge/License-MIT-blue.svg">
 </p>
 
-[中文版 README](README_CN.md)
+# WWDCHelper
+
+English | [中文](README_CN.md)
 
 > Inspired by qiaoxueshi/WWDC_2015_Video_Subtitle, ohoachuck/wwdc-downloader, and @onevcat's videos. Thanks for their inspiration and efforts. 👏
 
@@ -38,24 +40,7 @@ You should have [Swift Package Manager](https://swift.org/package-manager/) inst
 
 ### Run
 
-```sh
-> wwdchelper -h
-Usage: WWDCHelper [options]
-  -y, --year:
-      Setup the year of WWDC. Support ALL WWDCs from `2012` to `2018` now! Default is 2018.
-  -s, --sessions:
-      Setup the session numbers in WWDC. Default is all sessions.
-  -l, --language:
-      Setup the language of subtitle. Support `chs`, `eng`, and `jpn` (only WWDC 2018) now! Default is Simplified Chinese.
-  --sd:
-      Add sd tag for subtitle\'s filename. Default is for hd videos.
-  -p, --path:
-      Setup the download path of subtitles. Default is current folder.
-  -h, --help:
-      Print the help info.
-  -v, --version:
-      Print the version info.
-```
+![WWDCHelper -h](WWDCHelper-h.png)
 
 ### Demo
 

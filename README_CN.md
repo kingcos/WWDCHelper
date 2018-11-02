@@ -10,6 +10,10 @@
 <img src="https://img.shields.io/badge/License-MIT-blue.svg">
 </p>
 
+# WWDCHelper
+
+[English](README.md) | 中文
+
 > 受 qiaoxueshi/WWDC_2015_Video_Subtitle，ohoachuck/wwdc-downloader，以及 @onevcat 的视频启发。感谢他们的灵感与努力。👏
 
 [English Version README](README.md)
@@ -38,24 +42,7 @@ WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资�
 
 ### 运行
 
-```sh
-> wwdchelper -h
-Usage: WWDCHelper [options]
-  -y, --year:
-      Setup the year of WWDC. Support ALL WWDCs from `2012` to `2018` now! Default is 2018.
-  -s, --sessions:
-      Setup the session numbers in WWDC. Default is all sessions.
-  -l, --language:
-      Setup the language of subtitle. Support `chs`, `eng`, and `jpn` (only WWDC 2018) now! Default is Simplified Chinese.
-  --sd:
-      Add sd tag for subtitle\'s filename. Default is for hd videos.
-  -p, --path:
-      Setup the download path of subtitles. Default is current folder.
-  -h, --help:
-      Print the help info.
-  -v, --version:
-      Print the version info.
-```
+![WWDCHelper -h](WWDCHelper-h.png)
 
 ### Demo
 
