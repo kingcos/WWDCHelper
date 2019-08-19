@@ -5,10 +5,14 @@
 <p align="center">
 <a href="https://travis-ci.org/kingcos/WWDCHelper"><img src="https://www.travis-ci.org/kingcos/WWDCHelper.svg?branch=master"></a>
 <a href="https://codecov.io/gh/kingcos/WWDCHelper"><img src="https://codecov.io/gh/kingcos/WWDCHelper/branch/master/graph/badge.svg"></a>
-<img src="https://img.shields.io/badge/Swift-4.2-orange.svg">
+<img src="https://img.shields.io/badge/Swift-5.0-orange.svg">
 <img src="https://img.shields.io/badge/Platform-macOS-red.svg">
 <img src="https://img.shields.io/badge/License-MIT-blue.svg">
 </p>
+
+# WWDCHelper
+
+[English](README.md) | 中文
 
 > 受 qiaoxueshi/WWDC_2015_Video_Subtitle，ohoachuck/wwdc-downloader，以及 @onevcat 的视频启发。感谢他们的灵感与努力。👏
 
@@ -16,7 +20,7 @@
 
 ## 简介
 
-WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资源。现在，你可以用它直接获取 SD/HD 视频和对应 PDF 文档的链接，也可以直接下载英文、日文（仅限 WWDC 2018）、甚至**简体中文**的字幕。
+WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资源。现在，你可以用它直接获取 SD/HD 视频和对应 PDF 文档的链接，也可以直接下载英文、日文（仅限 WWDC 2018 & 2019）、甚至**简体中文**的字幕。
 
 当然，你也可以直接在 [releases](https://github.com/kingcos/WWDCHelper/releases) 页面仅下载字幕。
 
@@ -38,59 +42,42 @@ WWDCHelper 是一个 macOS 命令行工具，以便于获取 WWDC 官方的资�
 
 ### 运行
 
-```sh
-> wwdchelper -h
-Usage: WWDCHelper [options]
-  -y, --year:
-      Setup the year of WWDC. Support ALL WWDCs from `2012` to `2018` now! Default is 2018.
-  -s, --sessions:
-      Setup the session numbers in WWDC. Default is all sessions.
-  -l, --language:
-      Setup the language of subtitle. Support `chs`, `eng`, and `jpn` (only WWDC 2018) now! Default is Simplified Chinese.
-  --sd:
-      Add sd tag for subtitle\'s filename. Default is for hd videos.
-  -p, --path:
-      Setup the download path of subtitles. Default is current folder.
-  -h, --help:
-      Print the help info.
-  -v, --version:
-      Print the version info.
-```
+![WWDCHelper -h](WWDCHelper-h.png)
 
 ### Demo
 
-- *Update*: 如果您需要获取 WWDC 2018 所有 Session 信息（包括视频的下载链接）：
+- *Update*: 如果您需要获取 WWDC 2019 所有 Session 信息（包括视频的下载链接）：
 
 ```sh
-> wwdchelper -y 2018
+> wwdchelper -y 2019
 ```
 
-- *Update*: 如果您需要下载 WWDC 2018 所有英文字幕（**官网最新简体中文字幕已更新至 Releases 页面**）：
+- *Update*: 如果您需要下载 WWDC 2019 所有英文字幕（**官网最新简体中文字幕已更新至 Releases 页面**）：
 
 ```sh
 # HD 视频：
-> wwdchelper -y 2018 -l eng
+> wwdchelper -y 2019 -l eng
 or
 # SD 视频：
-> wwdchelper -y 2018 --sd -l eng
+> wwdchelper -y 2019 --sd -l eng
 ```
 
-- 如果您仅需要 WWDC 2018 中 Session 102 和 202 的信息：
+- 如果您仅需要 WWDC 2019 中 Session 202 和 203 的信息：
 
 ```sh
-> wwdchelper -s 102 202
+> wwdchelper -s 202 203
 or
-> wwdchelper -y 2018 -s 102 202
+> wwdchelper -y 2019 -s 202 203
 or
-> wwdchelper --year 2018 --sesions 102 202
+> wwdchelper --year 2019 --sesions 202 203
 ```
 
-- 如果您想要为 Session 102 和 202 的 SD（清晰度）视频下载简体中文字幕：
+- 如果您想要为 Session 202 和 203 的 SD（清晰度）视频下载简体中文字幕：
 
 ```sh
-> wwdchelper -s 102 202 -l chs --sd
+> wwdchelper -s 202 203 -l chs --sd
 or
-> wwdchelper --year 2018 --sessions 102 202 --language chs --sd
+> wwdchelper --year 2019 --sessions 202 203 --language chs --sd
 ```
 
 - 如果您想要为**所有** Session 的 HD（清晰度）视频下载简体中文字幕，并指定路径（**不推荐**）：
@@ -105,7 +92,7 @@ or
 
 - [x] 一次性下载多个字幕
 - [x] 支持所有官网提供字幕
-- [x] 支持所有年份 WWDC（2012～2018）
+- [x] 支持所有年份 WWDC（2012～2019）
 - [x] Swift 4.1 支持
 - [x] Swift 4.2 支持
 - [ ] 支持 Linux 🐧

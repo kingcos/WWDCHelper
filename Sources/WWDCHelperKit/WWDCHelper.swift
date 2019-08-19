@@ -12,6 +12,7 @@ import Rainbow
 import WWDCWebVTTToSRTHelperKit
 
 public enum WWDCYear: String {
+    case wwdc2019 = "wwdc2019"
     case wwdc2018 = "wwdc2018"
     case wwdc2017 = "wwdc2017"
     case wwdc2016 = "wwdc2016"
@@ -28,6 +29,8 @@ public enum WWDCYear: String {
         }
         
         switch value.lowercased() {
+        case "wwdc2019", "2019":
+            self = .wwdc2019
         case "wwdc2018", "2018":
             self = .wwdc2018
         case "wwdc2017", "2017":
