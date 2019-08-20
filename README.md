@@ -88,11 +88,12 @@ or
 
 > Maybe implement these features in the future.
 
-- [x] Download multiple subtitles at once
-- [x] Support subtitles in all languages that provided
-- [x] Support ALL WWDC (2012 ~ 2019)
-- [x] Swift 4.1
-- [x] Swift 4.2
+- [x] ~~Download multiple subtitles at once~~
+- [x] ~~Support subtitles in all languages that provided~~
+- [x] ~~Support ALL WWDC (2012 ~ 2019)~~
+- [x] ~~Swift 4.1~~
+- [x] ~~Swift 4.2~~
+- [x] ~~Swift 5.0~~
 - [ ] Support for Linux 🐧
 
 ### Reference
