@@ -24,7 +24,7 @@ public enum WWDCYear: String {
     
     init(_ value: String?) {
         guard let value = value else {
-            self = .wwdc2018
+            self = .wwdc2019
             return
         }
         
