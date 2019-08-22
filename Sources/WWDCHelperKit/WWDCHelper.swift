@@ -164,12 +164,17 @@ extension WWDCHelper {
                 }
             let strArr = content.flatMap { $0.map { $0 } }
             
-            guard let result = srtHelper.parse(strArr),
-                let data = result.data(using: .utf8) else { return }
-            
-            print(filename, "is downloading...")
-            
-            try data.write(to: path.url)
+            if strArr.isEmpty {
+                // Apple maybe upload empty content...
+                print("\(filename) downloaded error.".red.bold)
+            } else {
+                guard let result = srtHelper.parse(strArr),
+                    let data = result.data(using: .utf8) else { return }
+                
+                print(filename, "is downloading...")
+                
+                try data.write(to: path.url)
+            }
         }
         print("Download successfully.".green.bold)
     }
