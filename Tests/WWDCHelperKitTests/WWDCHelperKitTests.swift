@@ -70,7 +70,7 @@ class WWDCHelperKitTests: XCTestCase {
                 
                 $0.it("should get sessions info") {
                     let result = helper.getSessionsInfo(with: WWDCParser.shared).keys.count
-                    let expectResult = 136
+                    let expectResult = 135
                     
                     try expect(expectResult) == result
                 }
