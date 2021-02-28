@@ -12,6 +12,7 @@ import Rainbow
 import WWDCWebVTTToSRTHelperKit
 
 public enum WWDCYear: String {
+    case wwdc2020 = "wwdc2020"
     case wwdc2019 = "wwdc2019"
     case wwdc2018 = "wwdc2018"
     case wwdc2017 = "wwdc2017"
@@ -24,11 +25,13 @@ public enum WWDCYear: String {
     
     init(_ value: String?) {
         guard let value = value else {
-            self = .wwdc2019
+            self = .wwdc2020
             return
         }
         
         switch value.lowercased() {
+        case "wwdc2020", "2020":
+            self = .wwdc2020
         case "wwdc2019", "2019":
             self = .wwdc2019
         case "wwdc2018", "2018":
@@ -229,7 +232,9 @@ extension WWDCHelper {
     }
     
     func getSubtitleIndexURL(with resources: [String], and parser: RegexSessionInfoParsable) -> String? {
-        guard let prefix = getSubtitleIndexURLPrefix(with: resources, and: parser) else { return nil }
+        guard let prefix = getSubtitleIndexURLPrefix(with: resources, and: parser) else {
+            return nil
+        }
         return prefix + "/subtitles/eng/prog_index.m3u8"
     }
     

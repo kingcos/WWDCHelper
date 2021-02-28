@@ -18,7 +18,7 @@ English | [中文](README_CN.md)
 
 ## Info
 
-WWDCHelper is a command line tool on macOS for you to get WWDC info easily. Now you can get download links of SD/HD video & PDF, and download subtitles in English, Janpanese (only WWDC 2018 & 2019), and even Simplified Chinese directly by it.
+WWDCHelper is a command line tool on macOS for you to get WWDC info easily. Now you can get download links of SD/HD video & PDF, and download subtitles in English, Janpanese (only WWDC 2018 ~ 2020), and even Simplified Chinese directly by it.
 
 You can also download subtitles at the [releases](https://github.com/kingcos/WWDCHelper/releases) page.
 
@@ -44,20 +44,20 @@ You should have [Swift Package Manager](https://swift.org/package-manager/) inst
 
 ### Demo
 
-- *Update*: If you want to get all sessions info of WWDC 2019 (Including videos' download links):
+- *Update*: If you want to get all sessions info of WWDC 2020 (Including videos' download links):
 
 ```sh
-> wwdchelper -y 2019
+> wwdchelper -y 2020
 ```
 
-- *Update*: - If you want to download subtitles in English of WWDC 2019:
+- *Update*: - If you want to download subtitles in English of WWDC 2020:
 
 ```sh
 # HD Videos：
-> wwdchelper -y 2019 -l eng
+> wwdchelper -y 2020 -l eng
 or
 # SD Videos：
-> wwdchelper -y 2019 --sd -l eng
+> wwdchelper -y 2020 --sd -l eng
 ```
 
 - If you just want to get Session 202 & 203 info of WWDC 2019:

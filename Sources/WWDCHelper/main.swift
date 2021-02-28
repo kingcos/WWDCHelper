@@ -11,7 +11,7 @@ import CommandLineKit
 import Rainbow
 import WWDCHelperKit
 
-let appVersion = "v1.1.0"
+let appVersion = "v1.2.0"
 let cli = CommandLineKit.CommandLine()
 
 cli.formatOutput = { s, type in
@@ -31,11 +31,11 @@ cli.formatOutput = { s, type in
 }
 
 let yearOption = StringOption(shortFlag: "y", longFlag: "year",
-                             helpMessage: "Setup the year of WWDC. Support ALL WWDCs from `2012` to `2019` now! Default is WWDC 2019.")
+                             helpMessage: "Setup the year of WWDC. Support ALL WWDCs from `2012` to `2020` now! Default is WWDC 2020.")
 let sessionIDsOption = MultiStringOption(shortFlag: "s", longFlag: "sessions",
                                         helpMessage: "Setup the session numbers in WWDC. Default is all sessions.")
 let subtitleLanguageOption = StringOption(shortFlag: "l", longFlag: "language",
-                                         helpMessage: "Setup the language of subtitle. Support `chs`, `eng`, and `jpn` (only WWDC 2018 & 2019) now! Default is Simplified Chinese.")
+                                         helpMessage: "Setup the language of subtitle. Support `chs`, `eng`, and `jpn` (only WWDC 2018 ~ 2020) now! Default is Simplified Chinese.")
 let isSubtitleForSDVideoOption = BoolOption(longFlag: "sd",
                                            helpMessage: "Add sd tag for subtitle\'s filename. Default is for hd videos.")
 let subtitlePathOption = StringOption(shortFlag: "p", longFlag: "path",
@@ -70,9 +70,9 @@ if versionOption.value {
    exit(EX_OK);
 }
 
-let year = yearOption.value
-let sessionIDs = sessionIDsOption.value
-let subtitleLanguage: String? = subtitleLanguageOption.value?.lowercased()
+let year: String? = "2020" // yearOption.value
+let sessionIDs: [String] = ["10171"] // sessionIDsOption.value
+let subtitleLanguage: String? = "eng" //  subtitleLanguageOption.value?.lowercased()
 let subtitlePath = subtitlePathOption.value
 let isSubtitleForSDVideo = isSubtitleForSDVideoOption.value
 
@@ -95,9 +95,9 @@ do {
     
     switch err {
     case .unknownYear:
-        print("\(year!) hasn't been supported currently. Now support WWDC 2012 ~ WWDC 2019 same as developer official website.".red.bold)
+        print("\(year!) hasn't been supported currently. Now support WWDC 2012 ~ WWDC 2020 same as developer official website.".red.bold)
     case .unknownSubtitleLanguage:
-        print("Language \(subtitleLanguage!) is NOT supported for now, WWDC support Simpliefied Chinese, Japanese (for WWDC 2018 & 2019) and English.".red.bold)
+        print("Language \(subtitleLanguage!) is NOT supported for now, WWDC support Simpliefied Chinese, Japanese (for WWDC 2018 ~ 2020) and English.".red.bold)
     case .unknownSessionID:
         print("Session ID was not found, please check it.".red.bold)
     case .subtitlePathNotExist:
